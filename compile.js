@@ -129,6 +129,8 @@ function Parse(file){
 
     r(/[0-9]+\:(\{|\})/gm,'$1')
 
+    fs.writeFileSync('./cache/'+file, source)
+
     source = Danger(source)
 
     fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
