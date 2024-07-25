@@ -20,7 +20,7 @@ del out\%1.exe
 
 copy .\cache\%1.go.exe .\out\%1.exe
 
-del .\cache\%1.exe
+del .\cache\%1.go.exe
 del .\cache\%1.obj
 
 
