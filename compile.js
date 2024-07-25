@@ -1,5 +1,9 @@
 const fs = require('fs')
 
+const Danger = require('./danger.js')
+
+
+
 function Blocks(source){
     let newSource = ''
     var tab = 1
@@ -25,7 +29,7 @@ function Parse(file){
     const prefix = 'P'+FILE_INDEX
     FILE_INDEX++
 
-    let source = fs.readFileSync(file).toString()
+    let source = fs.readFileSync('./source/'+file).toString()
 
     source = Blocks(source)
 
@@ -62,25 +66,27 @@ function Parse(file){
         r(new RegExp('(\\b)'+name+'(\\b)','gm'),'$1'+prefix+'_'+name+'$2')
     })
 
-    var bidx = 1
-    r(new RegExp(bidx+'\\:\\{([\\s\\S]+?)'+bidx+'\\:\\}','gm'), match=>{
-        var BLOCK_LOCAL_DATA = []
-        var prfx = match.split(':')[0]
+    for(let i=1;i<32;i++){
+        var bidx = i
+        r(new RegExp(bidx+'\\:\\{([\\s\\S]+?)'+bidx+'\\:\\}','gm'), match=>{
+            var BLOCK_LOCAL_DATA = []
+            var prfx = match.split(':')[0]
 
-        match=match.replace(/var\ ([a-zA-Z0-9\_]+)/gm,match2=>{
-            var name = match2.split(' ')[1]
-            BLOCK_LOCAL_DATA.push(name)
-            return match2
-        })
-    
-        console.log('BLOCK_LOCAL_DATA',BLOCK_LOCAL_DATA)
-    
-        BLOCK_LOCAL_DATA.map(name=>{
-            match=match.replace(new RegExp('(\\b)'+name+'(\\b|\\(|\\ )','gm'),'$1B'+prfx+'_'+name+'$2')
-        })
+            match=match.replace(/var\ ([a-zA-Z0-9\_]+)/gm,match2=>{
+                var name = match2.split(' ')[1]
+                BLOCK_LOCAL_DATA.push(name)
+                return match2
+            })
+        
+            console.log('BLOCK_LOCAL_DATA',BLOCK_LOCAL_DATA)
+        
+            BLOCK_LOCAL_DATA.map(name=>{
+                match=match.replace(new RegExp('(\\b)'+name+'(\\b|\\(|\\ )','gm'),'$1B'+prfx+'_'+name+'$2')
+            })
 
-        return match
-    })
+            return match
+        })
+    }
 
 
 
@@ -117,7 +123,22 @@ function Parse(file){
 
 
 
-    fs.writeFileSync(file.replace('.js','.compiled.js'), source)
+    //              rest of compiler
+
+
+
+    r(/[0-9]+\:(\{|\})/gm,'$1')
+
+    source = Danger(source)
+
+    fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
 }
 
-Parse('test.js')
+var fileName = process.argv[2]
+
+Parse(fileName+'.js')
+
+
+let frame = fs.readFileSync('./frame/cmd.asm').toString()
+frame=frame.replace('{{INIT}}','include '+fileName+'.asm')
+fs.writeFileSync('./cache/'+fileName+'.go.asm',frame)
