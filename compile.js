@@ -110,7 +110,7 @@ function Parse(file){
 
         Parse(file)
 
-        return match
+        return 'include '+file.replace('.js','.asm')+'\n'
     })
 
     for(let key of Object.keys(IMP)){
