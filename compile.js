@@ -134,13 +134,15 @@ function Parse(file){
     source = Danger(source)
 
     fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
+
+    return source
 }
 
 var fileName = process.argv[2]
 
-Parse(fileName+'.js')
+const src = Parse(fileName+'.js')
 
 
 let frame = fs.readFileSync('./frame/cmd.asm').toString()
-frame=frame.replace('{{INIT}}','include '+fileName+'.asm')
-fs.writeFileSync('./cache/'+fileName+'.go.asm',frame)
+frame=frame.replace('{{INIT}}',src)
+fs.writeFileSync('./cache/'+fileName+'.asm',frame)
