@@ -11,21 +11,54 @@
 
     .code
 
-	{{INIT}}
+	
+.code
+    P1_SystemInit macro 
+    
+
+
+
+
+
+    
+
+
+    endm
+
+
+
+
+
+.code
+    P1_SystemDestroy macro 
+    
+
+
+
+
+
+    
+
+
+    endm
+
+
+
+.code
+    P1_SystemRender macro 
+    
+
+
+
+
+
+
+
+
+
+
+    endm
 
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-
-entry_point proc
-
-    P1_main
-
-    ;waitkey "  Press any key to continue ..."
-
-    invoke ExitProcess,0
-
-    ret
-
-entry_point endp
-
 
     end
