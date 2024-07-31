@@ -1,48 +1,40 @@
+; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 
-include test2.asm
+    include \masm64\include64\masm64rt.inc
 
+    include ..\include\extern.inc
 
+    .code
 
-
-
-.data
-P1_test dq 12.22
-.code
-
+	include test2.asm
 
 
-.code
-    P1_print macro 
-    
+var P1_test = 12.22
+
+function P1_print(){
+    P2_TestFunc()
+    var B1_P1_kuk = 23
+    printf('OK')
+}
+
+function P1_main(){
+    P1_print()
+    printf('OK')
+}
+
+; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
+entry_point proc
+
+    P1_main
+
+    ;waitkey "  Press any key to continue ..."
+
+    invoke ExitProcess,0
+
+    ret
+
+entry_point endp
 
 
-
-
-
-    P2_TestFunc
-
-    .data
-B1_P1_kuk dq 23
-.code
-
-    invoke printf, "OK"
-
-
-    endm
-
-
-
-.code
-    P1_main macro 
-    
-
-
-
-
-
-    P1_print
-
-    invoke printf, "OK"
-
-
-    endm
+    end

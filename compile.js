@@ -24,10 +24,26 @@ function Blocks(source){
 var DATA = []
 var FILE_INDEX = 1
 
+var FILES = {}
+var SOURCES = {}
+var EXPORTS = {}
+
+function getFI(file){
+    if(FILES[file]){
+        return FILES[file]
+    }else{
+        FILES[file] = FILE_INDEX
+        FILE_INDEX++
+    }
+    console.log('getFI',file)
+    return FILES[file]
+}
+
 function Parse(file){
 
-    const prefix = 'P'+FILE_INDEX
-    FILE_INDEX++
+    const prefix = 'P'+getFI(file)
+    //FILES[file] = FILE_INDEX
+    //FILE_INDEX++
 
     let source = fs.readFileSync('./source/'+file).toString()
 
@@ -89,34 +105,72 @@ function Parse(file){
     }
 
 
+    //exports
+    function Exports(fileImp){
+        console.log('Exports',fileImp)
+        console.log('getFI(fileImp)',getFI(fileImp))
+        var exp = EXPORTS[getFI(fileImp)]
+        console.log('Exports',exp)
+        return exp
+    }
 
     //                      imports
 
     var IMP = {}
     r(/import\ (.*)/gm, match=>{
+        var fileImp = match.split('\'')[1].split('\'')[0].trim()
+        fileImp = fileImp.replace('./','')
+        console.log('file',fileImp)
+
+        Parse(fileImp)
+
         match=match.replace(/[0-9]+\:/gm,'')
         console.log('IMPORT', match)
-        var IMPORTS = match.split('{')[1].split('}')[0].split(',')
+        if(match.indexOf('{')>-1){
+            var IMPORTS = match.split('{')[1].split('}')[0].split(',')
+        }else{
+            var scope = match.split('as')[1].split('from')[0].trim()
+            IMPORTS = Exports(fileImp).map(name=>{
+                var nameFRom=name.replace('P'+getFI(fileImp)+'_','')
+                name=name.replace('P'+getFI(fileImp)+'_',scope+'.')
+                return {from:nameFRom,target:name}
+            })
+        }
         console.log('IMPORTS',IMPORTS)
-        var file = match.split('\'')[1].split('\'')[0].trim()
-        file = file.replace('./','')
-        console.log('file',file)
+        
 
-        IMP[FILE_INDEX] = IMPORTS
+
+        IMPORTS = IMPORTS.map(imp=>{
+            var impp
+            if(!imp.from){
+                impp = {from:imp,target:imp}
+                if(imp.indexOf('as')>-1){
+                    var params= imp.split(' as ')
+                    impp.from = params[0]
+                    impp.target = params[1]
+                }
+            }else{
+                impp = imp
+            }
+            return impp
+        })
+        console.log('IMPORTS',IMPORTS)
+
+        IMP[getFI(fileImp)] = IMPORTS
         
         //IMPORTS.map(name=>{
         //    match=match.replace(new RegExp('(\\b)'+name+'(\\b|\\(|\\ )','gm'),'$1P'+FILE_INDEX+'_'+name+'$2')
         //})
 
-        Parse(file)
+        //Parse(fileImp)
 
-        return 'include '+file.replace('.js','.asm')+'\n'
+        return 'include '+fileImp.replace('.js','.asm')+'\n'
     })
 
     for(let key of Object.keys(IMP)){
         var IMP = IMP[key]
         IMP.map(name=>{
-            r(new RegExp('(\\b)'+name+'(\\b)','gm'),'$1P'+key+'_'+name+'$2')
+            r(new RegExp('(\\b)'+name.target+'(\\b)','gm'),'$1P'+key+'_'+name.from+'$2')
         })
     }
 
@@ -131,9 +185,25 @@ function Parse(file){
 
     fs.writeFileSync('./cache/'+file, source)
 
-    source = Danger(source)
+    //source = Danger(source)
 
     fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
+
+    SOURCES[getFI(file)] = source
+
+    //var src = SOURCES[getFI(fileImp)]
+    source.replace(/export .*/gm,match=>{
+        console.log('EXPORT', match)
+        var mm = match
+        if(match.indexOf('function')>-1){
+            mm = match.replace('export function','')
+            mm = mm.split('(')[0].trim()
+        }
+        if(!EXPORTS[getFI(file)]){
+            EXPORTS[getFI(file)] = []
+        }
+        EXPORTS[getFI(file)].push(mm)
+    })
 
     return source
 }

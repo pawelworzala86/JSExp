@@ -83,7 +83,7 @@ var parseSource = (source)=>{
     source = source.replace(/\/\*[\s\S]+?\*\//gm,'')
 
 
-
+/*
     //              & and inline functions
     var lines = source.split('\n')
     lines=lines.map(line=>{
@@ -104,7 +104,7 @@ var parseSource = (source)=>{
         return prefix+line
     })
     source = lines.join('\n')
-
+*/
 
     //inline functions
     r(/(.*)\(.*\(.*/gm,match=>{

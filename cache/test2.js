@@ -1,3 +1,3 @@
-function P2_TestFunc(){
+export function P2_TestFunc(){
     printf('HHH')
 }

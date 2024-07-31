@@ -1,3 +1,3 @@
-function TestFunc(){
+export function TestFunc(){
     printf('HHH')
 }

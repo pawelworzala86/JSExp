@@ -1,13 +1,3 @@
-
-.code
-    P2_TestFunc macro 
-    
-
-
-
-
-
-    invoke printf, "HHH"
-
-
-    endm
+export function P2_TestFunc(){
+    printf('HHH')
+}
