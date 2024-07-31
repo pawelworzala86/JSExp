@@ -185,14 +185,8 @@ function Parse(file){
 
     fs.writeFileSync('./cache/'+file, source)
 
-    //source = Danger(source)
-
-    fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
-
-    SOURCES[getFI(file)] = source
-
     //var src = SOURCES[getFI(fileImp)]
-    source.replace(/export .*/gm,match=>{
+    source = source.replace(/export .*/gm,match=>{
         console.log('EXPORT', match)
         var mm = match
         if(match.indexOf('function')>-1){
@@ -206,7 +200,14 @@ function Parse(file){
             EXPORTS[getFI(file)] = []
         }
         EXPORTS[getFI(file)].push(mm)
+        return match.replace('export ','')
     })
+
+    source = Danger(source)
+
+    fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
+
+    SOURCES[getFI(file)] = source
 
     return source
 }

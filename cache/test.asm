@@ -6,21 +6,54 @@
 
     .code
 
-	include test2.asm
+	
+include test2.asm
 
 
-var P1_test = 12.22
 
-function P1_print(){
-    P2_TestFunc()
-    var B1_P1_kuk = 23
-    printf('OK')
-}
 
-function P1_main(){
-    P1_print()
-    printf('OK')
-}
+
+.data
+P1_test dq 12.22
+.code
+
+
+
+.code
+    P1_print macro 
+    
+
+
+
+
+
+    P2_TestFunc
+
+    .data
+B1_P1_kuk dq 23
+.code
+
+    invoke printf, "OK"
+
+
+    endm
+
+
+
+.code
+    P1_main macro 
+    
+
+
+
+
+
+    P1_print
+
+    invoke printf, "OK"
+
+
+    endm
 
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 

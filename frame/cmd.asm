@@ -4,11 +4,6 @@
 
     include ..\include\extern.inc
 
-    include ..\include\requires.inc
-    include ..\include\opengl.inc
-    include ..\include\window.asm
-    include ..\include\math.asm
-
     .code
 
 	{{INIT}}

@@ -1,3 +1,13 @@
-export function P2_TestFunc(){
-    printf('HHH')
-}
+
+.code
+    P2_TestFunc macro 
+    
+
+
+
+
+
+    invoke printf, "HHH"
+
+
+    endm
