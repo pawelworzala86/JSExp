@@ -198,6 +198,9 @@ function Parse(file){
         if(match.indexOf('function')>-1){
             mm = match.replace('export function','')
             mm = mm.split('(')[0].trim()
+        }else{
+            mm = match.replace('export','')
+            mm = mm.split('=')[0].trim()
         }
         if(!EXPORTS[getFI(file)]){
             EXPORTS[getFI(file)] = []
