@@ -25,5 +25,5 @@
     externdef strtok: near
     externdef fgets: near
     externdef memset: near
-    ;externdef malloc: near
-    ;externdef relloc: near
+    externdef malloc: near
+    externdef relloc: near
