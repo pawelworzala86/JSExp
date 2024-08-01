@@ -26,45 +26,7 @@
 
     .code
 
-	
-.code
-    P1_SystemInit macro 
-    
-
-
-
-
-
-
-
-
-    endm
-
-.code
-    P1_SystemRender macro 
-    
-
-
-
-
-
-    
-
-
-    endm
-
-.code
-    P1_SystemDestroy macro 
-    
-
-
-
-
-
-    
-
-
-    endm
+	{{INIT}}
 
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 

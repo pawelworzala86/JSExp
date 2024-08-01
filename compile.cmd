@@ -1,4 +1,4 @@
-node compile %1
+node compile %1 %2
 
 IF ERRORLEVEL 1 GOTO koniec
 

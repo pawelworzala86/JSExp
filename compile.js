@@ -219,7 +219,8 @@ var fileName = process.argv[2]
 
 const src = Parse(fileName+'.js')
 
+var frameName = process.argv[3]??'cmd'
 
-let frame = fs.readFileSync('./frame/cmd.asm').toString()
+let frame = fs.readFileSync('./frame/'+frameName+'.asm').toString()
 frame=frame.replace('{{INIT}}',src)
 fs.writeFileSync('./cache/'+fileName+'.asm',frame)
