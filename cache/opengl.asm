@@ -31,6 +31,42 @@
     .code
 
 	
+include fs.asm
+
+
+
+
+
+.data
+P1_vertices dq 1
+.code
+
+.data
+P1_vertices2 dq 1
+.code
+
+.data
+P1_coords dq 1
+.code
+
+
+
+.data
+P1_VAO dq 0
+.code
+
+.data
+P1_bufferID dq 0
+.code
+
+
+
+
+
+
+
+
+
 .code
     P1_SystemInit macro 
     
@@ -42,6 +78,10 @@
 
 
     invoke InitGL
+
+
+
+    P2_ReadFileSync "default.frag"
 
 
 
