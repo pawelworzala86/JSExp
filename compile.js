@@ -28,6 +28,8 @@ var FILES = {}
 var SOURCES = {}
 var EXPORTS = {}
 
+var GLFuncs = []
+
 function getFI(file){
     if(FILES[file]){
         return FILES[file]
@@ -210,6 +212,13 @@ function Parse(file){
 
     fs.writeFileSync('./cache/'+file.replace('.js','.asm'), source)
 
+    //var GLFuncs = []
+    r(/(gl[a-zA-Z0-9\_]+)/gm,match=>{
+        GLFuncs.push(match)
+        return match
+    })
+    console.log('GLF',GLFuncs)
+
     SOURCES[getFI(file)] = source
 
     return source
@@ -226,6 +235,12 @@ if(src.indexOf('P1_main')>-1){
 }else{
     frameName = 'window'
 }
+
+
+
+var gl64 = require('./build/make.js')
+console.log('GLF',GLFuncs)
+gl64(GLFuncs)
 
 let frame = fs.readFileSync('./frame/'+frameName+'.asm').toString()
 frame=frame.replace('{{INIT}}',src)

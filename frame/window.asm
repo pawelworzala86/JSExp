@@ -17,6 +17,10 @@
 
     include ..\include\math.asm
 
+    include ..\build\gl46.d.inc
+
+    include ..\build\gl46.inc
+
     .data?
 
     prm1 dq ?
