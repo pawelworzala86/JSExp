@@ -192,6 +192,9 @@ function Parse(file){
         if(match.indexOf('function')>-1){
             mm = match.replace('export function','')
             mm = mm.split('(')[0].trim()
+        }else if(match.indexOf('class')>-1){
+            mm = match.replace('export class','')
+            mm = mm.split('{')[0].trim()
         }else{
             mm = match.replace('export','')
             mm = mm.split('=')[0].trim()
