@@ -82,7 +82,7 @@ var parseSource = (source)=>{
     source = source.replace(/\/\/[\s\S]+?$/gm,'')
     source = source.replace(/\/\*[\s\S]+?\*\//gm,'')
 
-    r(/var (.*) \= \[(.*)\]/gm,'.data?\n$1 dq $2')
+    r(/var (.*) \= \[(.*)\]/gm,'.data\n$1 dq $2')
 
 
 /*

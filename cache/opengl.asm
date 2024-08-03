@@ -37,15 +37,15 @@ include fs.asm
 
 
 
-.data?
+.data
 
 P1_vertices dq 1.0,0.9,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0
 
-.data?
+.data
 
 P1_vertices2 dq 1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0
 
-.data?
+.data
 
 P1_coords dq 1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0
 
@@ -83,7 +83,7 @@ P1_bufferID dq 0
 
     invoke printf, "2"
 
-    invoke glBufferData, GL_ARRAY_BUFFER, length, array,GL_STATIC_DRAW
+    invoke glBufferData, GL_ARRAY_BUFFER, length, addr array,GL_STATIC_DRAW
 
     
 
@@ -223,6 +223,10 @@ mov P1_programID, rax
 
 
 
+    invoke printf, "after"
+
+
+
     invoke glBindVertexArray, 0
 
 
@@ -236,7 +240,9 @@ mov P1_programID, rax
 
 
 
-    
+    invoke glBindVertexArray, P1_VAO
+
+	invoke glDrawArrays, GL_TRIANGLES, 0, 6
 
 
     endm

@@ -16,7 +16,7 @@ function P1_CreateBuffer(posID,ssize,sssize,length,array){
 
 	glBindBuffer(GL_ARRAY_BUFFER, P1_bufferID)
     printf('2')
-    glBufferData(GL_ARRAY_BUFFER, length, array,GL_STATIC_DRAW)
+    glBufferData(GL_ARRAY_BUFFER, length, &array,GL_STATIC_DRAW)
     
     printf('2')
 
@@ -78,10 +78,13 @@ function P1_SystemInit(){
     P1_CreateBuffer(0,3,3*8,18*8,P1_vertices)
     P1_CreateBuffer(1,2,2*8,12*8,P1_coords)
 
+    printf('after')
+
     glBindVertexArray(0)
 }
 function P1_SystemRender(){
-    
+    glBindVertexArray(P1_VAO)
+	glDrawArrays(GL_TRIANGLES, 0, 6)
 }
 function P1_SystemDestroy(){
     
