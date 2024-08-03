@@ -31,7 +31,7 @@ OBJTest ENDS
 
 
 
-mov rax, 23.32
+mov rax, 2332
 mov qword ptr self[OBJTest_varA], rax
 
     
@@ -55,7 +55,11 @@ P1_testOBJ label OBJTest
 
 
 
-    invoke printf, "%f", qword ptr P1_testOBJ[OBJTest_varA]
+    OBJTest_constructor P1_testOBJ
+
+
+
+    invoke printf, "%i", qword ptr P1_testOBJ[OBJTest_varA]
 
 
 

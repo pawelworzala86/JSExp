@@ -87,12 +87,20 @@ function Parse(source){
         return '.data?\n'+prop+' label '+className
     })
 
+    console.log(CLASSES)
+
     for(let key of Object.keys(CLASSES)){
         const CLASS = CLASSES[key]
         for(let local of CLASS.locals){
+            for(let fun of CLASS.funcs){
+                source=source.replace(
+new RegExp(local+'\\.'+fun+'\\(','gm'),key+'_'+fun+'('+local+',')
+            }
             source=source.replace(new RegExp(local+'\\.([a-zA-Z0-9\_]+)','gm'),local+'['+key+'_$1'+']')
         }
     }
+
+    source=source.replace(/\,\)/gm,')')
 
 
 

@@ -1,6 +1,6 @@
 class OBJTest{
     constructor(){
-        this.varA = 23.32
+        this.varA = 2332
     }
 }
 
@@ -8,6 +8,8 @@ var P1_testOBJ = new OBJTest()
 
 function P1_main(){
 
-    printf("%f", P1_testOBJ.varA)
+    P1_testOBJ.constructor()
+
+    printf("%i", P1_testOBJ.varA)
 
 }
