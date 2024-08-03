@@ -64,21 +64,23 @@ mov qword ptr self[FileSystem_P1_handle], rax
 
         
 
-        GetFileSize(self[FileSystem_P1_handle], 0)
-mov P1_fsize, rax
+GetFileSize(self[FileSystem_P1_handle], 0)
+mov qword ptr self[FileSystem_P1_fsize], rax
+
 
         
 
-        printf('P1_fsize %i',P1_fsize)
+        printf('P1_fsize %i',self[FileSystem_P1_fsize])
 
-        malloc(P1_fsize)
-mov P1_buffor, rax
+malloc(self[FileSystem_P1_fsize])
+mov qword ptr self[FileSystem_P1_buffor], rax
+
 
         
 
-        ReadFile(self[FileSystem_P1_handle], P1_buffor, P1_fsize, 0, 0)
+        ReadFile(self[FileSystem_P1_handle], &self[FileSystem_P1_buffor], &self[FileSystem_P1_fsize], 0, 0)
 
-        printf('%s',P1_buffor)
+        printf('%s',self[FileSystem_P1_buffor])
 
         CloseHandle(self[FileSystem_P1_handle])
 

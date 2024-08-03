@@ -81,21 +81,23 @@ mov qword ptr qword ptr self[FileSystem_P1_handle], rax
 
         
 
-        invoke GetFileSize, qword ptr self[FileSystem_P1_handle], 0
-mov P1_fsize, rax
+invoke GetFileSize, qword ptr self[FileSystem_P1_handle], 0
+mov qword ptr qword ptr self[FileSystem_P1_fsize], rax
+
 
         
 
-        invoke printf, "P1_fsize %i",P1_fsize
+        invoke printf, "P1_fsize %i",qword ptr self[FileSystem_P1_fsize]
 
-        invoke malloc, P1_fsize
-mov P1_buffor, rax
+invoke malloc, qword ptr self[FileSystem_P1_fsize]
+mov qword ptr qword ptr self[FileSystem_P1_buffor], rax
+
 
         
 
-        invoke ReadFile, qword ptr self[FileSystem_P1_handle], P1_buffor, P1_fsize, 0, 0
+        invoke ReadFile, qword ptr self[FileSystem_P1_handle], addr qword ptr self[FileSystem_P1_buffor], addr qword ptr self[FileSystem_P1_fsize], 0, 0
 
-        invoke printf, "%s",P1_buffor
+        invoke printf, "%s",qword ptr self[FileSystem_P1_buffor]
 
         invoke CloseHandle, qword ptr self[FileSystem_P1_handle]
 
