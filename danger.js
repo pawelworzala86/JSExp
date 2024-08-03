@@ -82,6 +82,8 @@ var parseSource = (source)=>{
     source = source.replace(/\/\/[\s\S]+?$/gm,'')
     source = source.replace(/\/\*[\s\S]+?\*\//gm,'')
 
+    r(/var (.*) \= \[(.*)\]/gm,'.data?\n$1 dq $2')
+
 
 /*
     //              & and inline functions
@@ -563,6 +565,8 @@ ${name} dq ${data}
 
     //source = source.replace(/([a-zA-Z0-9]+)\.([a-zA-Z]+)/gm,'$1_$2')
 
+    
+
     source = source.replace(/var ([a-zA-Z0-9\_]+) \= new Array\(([0-9]+)\)/gm,match=>{
         match=match.replace('var','')
         var name = /([a-zA-Z0-9\_]+)/gm.exec(match)[1]
@@ -594,6 +598,7 @@ mov qword ptr ${name}, rax
         match=match.replace('var','')
         var name = /([a-zA-Z0-9\_]+)/gm.exec(match)[1]
         var data = /\= (\-?[0-9\.\,]+)/gm.exec(match)[1]
+        //var data = 'KUKU'
         DATA.push(name)
         return `.data
 ${name} dq ${data}

@@ -37,17 +37,17 @@ include fs.asm
 
 
 
-.data
-P1_vertices dq 1
-.code
+.data?
 
-.data
-P1_vertices2 dq 1
-.code
+P1_vertices dq 1.0,0.9,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0
 
-.data
-P1_coords dq 1
-.code
+.data?
+
+P1_vertices2 dq 1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0
+
+.data?
+
+P1_coords dq 1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0
 
 
 
@@ -62,7 +62,7 @@ P1_bufferID dq 0
 
 
 .code
-    P1_CreateBuffer macro posID,ssize,length,array
+    P1_CreateBuffer macro posID,ssize,sssize,length,array
     
 
 
@@ -75,17 +75,25 @@ P1_bufferID dq 0
 
 
 
-	invoke glBindBuffer, GL_ARRAY_BUFFER, P1_bufferID
-lea rax, 8
+    invoke printf, "1"
 
-    invoke glBufferData, GL_ARRAY_BUFFER, lengthrax, array,GL_STATIC_DRAW
+
+
+	invoke glBindBuffer, GL_ARRAY_BUFFER, P1_bufferID
+
+    invoke printf, "2"
+
+    invoke glBufferData, GL_ARRAY_BUFFER, length, array,GL_STATIC_DRAW
+
+    
+
+    invoke printf, "2"
 
 
 
     invoke glEnableVertexAttribArray, posID
-lea rax, 8
 
-	invoke glVertexAttribPointer, posID,ssize,GL_DOUBLE,GL_FALSE, ssizerax, 0
+	invoke glVertexAttribPointer, posID,ssize,GL_DOUBLE,GL_FALSE, sssize, 0
 
 
     endm
@@ -152,6 +160,70 @@ mov P1_vertexShader, rax
     invoke printf, "OK"
 
 
+
+    P2_ReadFileSync "default.frag"
+
+
+
+invoke glCreateShader, GL_FRAGMENT_SHADER;
+mov P1_fragmentShader, rax
+
+    invoke glShaderSource, P1_fragmentShader,1, addr P2_buffor, addr P2_fsize;
+
+    invoke glCompileShader, P1_fragmentShader;
+
+
+
+
+
+invoke glCreateProgram;
+mov P1_programID, rax
+
+    invoke glAttachShader, P1_programID, P1_vertexShader;
+
+    invoke glAttachShader, P1_programID, P1_fragmentShader;
+
+    invoke glLinkProgram, P1_programID;
+
+
+
+	invoke glUseProgram, P1_programID;
+
+    
+
+
+
+    invoke glDetachShader, P1_programID, P1_vertexShader;
+
+	invoke glDetachShader, P1_programID, P1_fragmentShader;
+
+
+
+    invoke glDeleteShader, P1_vertexShader;
+
+    invoke glDeleteShader, P1_fragmentShader;
+
+
+
+    invoke glGenVertexArrays, 1, addr P1_VAO
+
+	invoke printf, "OK %i", P1_VAO
+
+    invoke glBindVertexArray, P1_VAO
+
+
+
+    invoke printf, "before"
+
+
+
+    P1_CreateBuffer 0,3,24,144,P1_vertices
+
+    P1_CreateBuffer 1,2,16,96,P1_coords
+
+
+
+    invoke glBindVertexArray, 0
 
 
     endm

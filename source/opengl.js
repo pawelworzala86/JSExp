@@ -7,15 +7,20 @@ var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
 var VAO = 0
 var bufferID = 0
 
-function CreateBuffer(posID,ssize,length,array){
+function CreateBuffer(posID,ssize,sssize,length,array){
 	//lea rax, bufferID
 	glGenBuffers(1, &bufferID)
 
+    printf('1')
+
 	glBindBuffer(GL_ARRAY_BUFFER, bufferID)
-    glBufferData(GL_ARRAY_BUFFER, length*8, array,GL_STATIC_DRAW)
+    printf('2')
+    glBufferData(GL_ARRAY_BUFFER, length, array,GL_STATIC_DRAW)
+    
+    printf('2')
 
     glEnableVertexAttribArray(posID)
-	glVertexAttribPointer(posID,ssize,GL_DOUBLE,GL_FALSE, ssize*8, 0)
+	glVertexAttribPointer(posID,ssize,GL_DOUBLE,GL_FALSE, sssize, 0)
 }
 
 var vertexShader = 0
@@ -42,6 +47,37 @@ function SystemInit(){
 
     printf('OK')
 
+    fs.ReadFileSync('default.frag')
+
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader,1, &fs.buffor, &fs.fsize);
+    glCompileShader(fragmentShader);
+
+
+    programID = glCreateProgram();
+    glAttachShader(programID, vertexShader);
+    glAttachShader(programID, fragmentShader);
+    glLinkProgram(programID);
+
+	glUseProgram(programID);
+    //gl.ValidateProgram,*programID
+
+    glDetachShader(programID, vertexShader);
+	glDetachShader(programID, fragmentShader);
+
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    glGenVertexArrays(1, &VAO)
+	printf('OK %i', VAO)
+    glBindVertexArray(VAO)
+
+    printf('before')
+
+    CreateBuffer(0,3,3*8,18*8,vertices)
+    CreateBuffer(1,2,2*8,12*8,coords)
+
+    glBindVertexArray(0)
 }
 function SystemRender(){
     
