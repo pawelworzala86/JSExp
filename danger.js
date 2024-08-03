@@ -75,7 +75,7 @@ var parseSource = (source)=>{
     }
 
 
-    source = ParseBlocks(source)
+    //source = ParseBlocks(source)
 
     
     //clean code
@@ -408,7 +408,7 @@ ${name} dq ${data}
 
 
 
-
+/*
 
     source = source.replace(/^class([\s\S]+?)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
         var name = match.split(' ')[1].replace('{','').trim().split(':')[0]
@@ -506,7 +506,7 @@ ${name} dq ${data}
 
     //fs.writeFileSync('./cache/objected2.js',source)
 
-
+*/
 
 
 
@@ -671,7 +671,7 @@ mov rax,[rbx+rcx]
 
 
 
-
+/*
     source = source.replace(/([a-zA-Z0-9\_]+)\[([a-zA-Z\_]+)\]/gm,match=>{
         var params1 = /([a-zA-Z0-9\_]+)/gm.exec(match)[1]
         var params2 = /([a-zA-Z\_]+)/gm.exec(match)[1]
@@ -679,7 +679,7 @@ mov rax,[rbx+rcx]
         mov rcx,${params2}
 mov [rcx+rbx]
 `
-    })
+    })*/
 
 
     //arrays
@@ -719,6 +719,8 @@ mov [rcx+rbx]
     r(/\:ptr\ qword/gm,'')
 
     r(/mov rax, invoke /gm,'invoke ')
+
+    r(/(\b)([a-zA-Z0-9\_]+)\[/gm,'qword ptr $1$2[')
     
     //qword ptr self +qword ptr 1 + 0
 

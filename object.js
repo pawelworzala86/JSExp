@@ -1,4 +1,4 @@
-const fs=require('fs')
+//const fs=require('fs')
 
 function Blocks(source){
     let newSource = ''
@@ -54,7 +54,7 @@ function Parse(source){
             }
             funcs.push(name)
             console.log(params)
-            mm=mm.replace(name+'(',CLASSName+'_'+name+'(self,')
+            mm=mm.replace(name+'(','function '+CLASSName+'_'+name+'(self,')
             mm=mm.replace(/\,\)/gm,')')
             mm=mm.replace(/this/gm,'self')
             return mm
@@ -62,14 +62,20 @@ function Parse(source){
         var pref = ''
         var idx = 0
         for(let param of params){
-            pref+=CLASSName+'_'+param.name+' = '+idx+'\n'
+            pref+=CLASSName+'_'+param.name+' equ '+idx+'\n'
             idx++
             match=match.replace(new RegExp('self\\.'+param.name,'gm'),'self['+CLASSName+'_'+param.name+']')
         }
 
         CLASSES[CLASSName] = {params,funcs,locals:[]}
 
-        return pref+'\n\n'+match
+        var struct = CLASSName+' STRUCT\n'
+        for(let param of params){
+            struct += param.name+' QWORD ?\n'
+        }
+        struct += CLASSName+' ENDS\n'
+
+        return pref+'\n\n'+struct+'\n\n'+match
     })
 
     console.log(CLASSES)
@@ -78,7 +84,7 @@ function Parse(source){
         var prop = match.split('=')[0].replace('var','').trim()
         var className = match.split('new')[1].replace('()','').trim()
         CLASSES[className].locals.push(prop)
-        return prop+' label '+className
+        return '.data?\n'+prop+' label '+className
     })
 
     for(let key of Object.keys(CLASSES)){
@@ -94,8 +100,10 @@ function Parse(source){
 }
 
 
-let code = fs.readFileSync('./testobj.js').toString()
+//let code = fs.readFileSync('./testobj.js').toString()
 
-code = Parse(code)
+//code = Parse(code)
 
-fs.writeFileSync('./obj.js',code)
+module.exports = Parse
+
+//fs.writeFileSync('./obj.js',code)

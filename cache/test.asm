@@ -1,4 +1,12 @@
+; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 
+    include \masm64\include64\masm64rt.inc
+
+    include ..\include\extern.inc
+
+    .code
+
+	
 include test2.asm
 
 
@@ -46,3 +54,20 @@ B1_P1_kuk dq 23
 
 
     endm
+
+; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
+entry_point proc
+
+    P1_main
+
+    ;waitkey "  Press any key to continue ..."
+
+    invoke ExitProcess,0
+
+    ret
+
+entry_point endp
+
+
+    end

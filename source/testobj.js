@@ -6,4 +6,8 @@ class OBJTest{
 
 var testOBJ = new OBJTest()
 
-printf("%f", testOBJ.varA)
+function main(){
+
+    printf("%f", testOBJ.varA)
+
+}

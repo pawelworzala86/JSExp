@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const Danger = require('./danger.js')
-
+const Obj = require('./object.js')
 
 
 function Blocks(source){
@@ -48,6 +48,10 @@ function Parse(file){
     //FILE_INDEX++
 
     let source = fs.readFileSync('./source/'+file).toString()
+
+
+    //source = Obj(source)
+
 
     source = Blocks(source)
 
@@ -211,6 +215,10 @@ function Parse(file){
         EXPORTS[getFI(file)].push(mm)
         return match.replace('export ','')
     })
+
+    source = Obj(source)
+
+    fs.writeFileSync('./cache/'+file.replace('.js','.2.asm'), source)
 
     source = Danger(source)
 
