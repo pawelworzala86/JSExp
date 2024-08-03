@@ -37,7 +37,7 @@ function SystemInit(){
 	//printf('shader %s', buffor)
 
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader,1, fs.buffor, fs.fsize);
+    glShaderSource(vertexShader,1, &fs.buffor, &fs.fsize);
     glCompileShader(vertexShader);
 
     printf('OK')

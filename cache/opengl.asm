@@ -140,17 +140,16 @@ P1_programID dq 0
 
 
 
-	invoke P1_glCreateShader, GL_VERTEX_SHADER;
+invoke glCreateShader, GL_VERTEX_SHADER;
+mov P1_vertexShader, rax
 
-    invoke glShaderSource, P1_vertexShader,1, fs.buffor, fs.fsize;
+    invoke glShaderSource, P1_vertexShader,1, addr P2_buffor, addr P2_fsize;
 
     invoke glCompileShader, P1_vertexShader;
 
 
 
     invoke printf, "OK"
-mov qword ptr vertexShader, rax
-
 
 
 

@@ -197,6 +197,9 @@ function Parse(file){
         }else if(match.indexOf('class')>-1){
             mm = match.replace('export class','')
             mm = mm.split('{')[0].trim()
+        }else if(match.indexOf('var')>-1){
+            mm = match.replace('export var','')
+            mm = mm.split('{')[0].trim()
         }else{
             mm = match.replace('export','')
             mm = mm.split('=')[0].trim()
@@ -204,6 +207,7 @@ function Parse(file){
         if(!EXPORTS[getFI(file)]){
             EXPORTS[getFI(file)] = []
         }
+        mm = mm.split('=')[0].trim()
         EXPORTS[getFI(file)].push(mm)
         return match.replace('export ','')
     })

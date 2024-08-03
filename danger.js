@@ -575,7 +575,7 @@ ${name} dq ?
 `
     })
 
-    source = source.replace(/([a-zA-Z0-9\[\]]+) \= ([a-zA-Z0-9]+)\(([\s\S]+?)\)$/gm,match=>{
+    source = source.replace(/([a-zA-Z0-9\[\]]+) \= ([a-zA-Z0-9]+)\((.*)\)$/gm,match=>{
         var name = /([a-zA-Z0-9\[\]]+)/gm.exec(match)[1]
         var call = /([a-zA-Z0-9]+\([\s\S]+?\))$/gm.exec(match)[1]
         if(ignoreName(call.split('(')[0])){
@@ -712,6 +712,8 @@ mov [rcx+rbx]
     source = source.replace(/\&/gm,'addr ')
 
     r(/\:ptr\ qword/gm,'')
+
+    r(/mov rax, invoke /gm,'invoke ')
     
     //qword ptr self +qword ptr 1 + 0
 
