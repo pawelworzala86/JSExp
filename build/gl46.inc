@@ -1380,6 +1380,22 @@ GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW = 33517
 
 .code
 InitGL proc
+invoke wglGetProcAddress, "glBindBuffer"
+mov [glBindBuffer],rax
+invoke wglGetProcAddress, "glGenBuffers"
+mov [glGenBuffers],rax
+invoke wglGetProcAddress, "glBufferData"
+mov [glBufferData],rax
+invoke wglGetProcAddress, "glCompileShader"
+mov [glCompileShader],rax
+invoke wglGetProcAddress, "glCreateShader"
+mov [glCreateShader],rax
+invoke wglGetProcAddress, "glEnableVertexAttribArray"
+mov [glEnableVertexAttribArray],rax
+invoke wglGetProcAddress, "glShaderSource"
+mov [glShaderSource],rax
+invoke wglGetProcAddress, "glVertexAttribPointer"
+mov [glVertexAttribPointer],rax
 
 
 ret

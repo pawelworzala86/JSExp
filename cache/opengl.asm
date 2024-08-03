@@ -61,6 +61,55 @@ P1_bufferID dq 0
 
 
 
+.code
+    P1_CreateBuffer macro posID,ssize,length,array
+    
+
+
+
+
+
+	
+
+	invoke glGenBuffers, 1, addr P1_bufferID
+
+
+
+	invoke glBindBuffer, GL_ARRAY_BUFFER, P1_bufferID
+lea rax, 8
+
+    invoke glBufferData, GL_ARRAY_BUFFER, lengthrax, array,GL_STATIC_DRAW
+
+
+
+    invoke glEnableVertexAttribArray, posID
+lea rax, 8
+
+	invoke glVertexAttribPointer, posID,ssize,GL_DOUBLE,GL_FALSE, ssizerax, 0
+
+
+    endm
+
+
+
+.data
+P1_vertexShader dq 0
+.code
+
+.data
+P1_fragmentShader dq 0
+.code
+
+
+
+.data
+P1_programID dq 0
+.code
+
+
+
+
+
 
 
 
@@ -81,11 +130,27 @@ P1_bufferID dq 0
 
 
 
-    P2_ReadFileSync "default.frag"
+    
+
+    P2_ReadFileSync "default.vert"
+
+
+
+	
+
+
+
+	invoke P1_glCreateShader, GL_VERTEX_SHADER;
+
+    invoke glShaderSource, P1_vertexShader,1, fs.buffor, fs.fsize;
+
+    invoke glCompileShader, P1_vertexShader;
 
 
 
     invoke printf, "OK"
+mov qword ptr vertexShader, rax
+
 
 
 
