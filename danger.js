@@ -539,7 +539,7 @@ ${name} dq ${data}
                 body=body.replace(new RegExp('('+local+')','gm'),name+'_$1')
             }
 
-            if(['SystemInit','SystemDestroy','SystemRender'].includes(name)||(name.indexOf('Proc')===0)){
+            if(['P1_SystemInit','P1_SystemDestroy','P1_SystemRender'].includes(name)||(name.indexOf('Proc')===0)){
                 PROCS.push(name)
                 return `.code
     ${name} proc ${params}

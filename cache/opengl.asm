@@ -125,7 +125,7 @@ P1_programID dq 0
 
 
 .code
-    P1_SystemInit macro 
+    P1_SystemInit proc 
     
 
 
@@ -230,10 +230,11 @@ mov P1_programID, rax
     invoke glBindVertexArray, 0
 
 
-    endm
+    ret
+    P1_SystemInit endp
 
 .code
-    P1_SystemRender macro 
+    P1_SystemRender proc 
     
 
 
@@ -245,10 +246,11 @@ mov P1_programID, rax
 	invoke glDrawArrays, GL_TRIANGLES, 0, 6
 
 
-    endm
+    ret
+    P1_SystemRender endp
 
 .code
-    P1_SystemDestroy macro 
+    P1_SystemDestroy proc 
     
 
 
@@ -258,7 +260,8 @@ mov P1_programID, rax
     
 
 
-    endm
+    ret
+    P1_SystemDestroy endp
 
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 
@@ -404,7 +407,7 @@ entry_point endp
 
 TestThread PROC
     ;invoke printf,"THREDED %s",lf
-    P1_SystemRender
+    rcall P1_SystemRender
     invoke	SwapBuffers,hDC
     fn SleepEx,16,0
     rcall TestThread
@@ -542,7 +545,7 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
             invoke	glShadeModel,GL_SMOOTH
 
 
-            P1_SystemInit
+            rcall P1_SystemInit
 
                 ;invoke SetForegroundWindow, hWin
 
@@ -561,7 +564,7 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
 
       .case WM_DESTROY
 
-            P1_SystemDestroy
+            rcall P1_SystemDestroy
 
             rcall PostQuitMessage,NULL
 
@@ -598,7 +601,7 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
 
             ;mov hThread, rv(CreateThread,0,0, addr TestThread,addr arr,0,0)
 
-            P1_SystemRender
+            rcall P1_SystemRender
             
             ;invoke  glFlush
 
