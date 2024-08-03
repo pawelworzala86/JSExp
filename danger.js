@@ -1,6 +1,6 @@
 //var fileName = process.argv[2]
 
-//const fs = require('fs')
+const fs = require('fs')
 
 //const sourceOrigin = await Deno.readTextFile('./source/test.c');
 //const sourceOrigin = fs.readFileSync('./source/'+fileName+'.js').toString()
@@ -579,17 +579,22 @@ ${name} dq ?
 `
     })
 
-    source = source.replace(/([a-zA-Z0-9\[\]]+) \= ([a-zA-Z0-9]+)\((.*)\)$/gm,match=>{
-        var name = /([a-zA-Z0-9\[\]]+)/gm.exec(match)[1]
-        var call = /([a-zA-Z0-9]+\([\s\S]+?\))$/gm.exec(match)[1]
+    fs.writeFileSync('./cache/11111.js',source)
+
+    source = source.replace(/(.*) \= ([a-zA-Z0-9]+)\((.*)\)$/gm,match=>{
+        //var name = /([a-zA-Z0-9\[\]]+)/gm.exec(match)[1]
+        var name = match.split('=')[0].trim()
+        //var call = /([a-zA-Z0-9]+\([\s\S]+?\))$/gm.exec(match)[1]
+        var call = match.split('=')[1].trim()
         if(ignoreName(call.split('(')[0])){
             return match
         }
+        console.log('name',name)
         return `${call}
 mov qword ptr ${name}, rax
 `
     })
-
+    fs.writeFileSync('./cache/22222.js',source)
 
     r(/var (.*) \= \?/gm,'.data?\n$1 dq ?')
 
