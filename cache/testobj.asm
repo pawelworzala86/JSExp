@@ -13,16 +13,6 @@ OBJTest_varA equ 0
 
 
 
-OBJTest STRUCT
-
-varA QWORD ?
-
-OBJTest ENDS
-
-
-
-
-
     .code
     OBJTest_constructor macro self
     
@@ -41,7 +31,7 @@ mov qword ptr self[OBJTest_varA], rax
 
 .data?
 
-P1_testOBJ label OBJTest
+P1_testOBJ dq ? 
 
 
 

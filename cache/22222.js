@@ -19,20 +19,6 @@ FileSystem_P1_buffor equ 2
 
 
 
-FileSystem STRUCT
-
-P1_handle QWORD ?
-
-P1_fsize QWORD ?
-
-P1_buffor QWORD ?
-
-FileSystem ENDS
-
-
-
-
-
     .code
     FileSystem_constructor macro self
     
@@ -64,23 +50,21 @@ mov qword ptr self[FileSystem_P1_handle], rax
 
         
 
-GetFileSize(self[FileSystem_P1_handle], 0)
-mov qword ptr self[FileSystem_P1_fsize], rax
-
-
-        
-
-        printf('P1_fsize %i',self[FileSystem_P1_fsize])
-
-malloc(self[FileSystem_P1_fsize])
-mov qword ptr self[FileSystem_P1_buffor], rax
-
+        GetFileSize(self[FileSystem_P1_handle], 0)
+mov P1_fsize, rax
 
         
 
-        ReadFile(self[FileSystem_P1_handle], &self[FileSystem_P1_buffor], &self[FileSystem_P1_fsize], 0, 0)
+        printf('P1_fsize %i',P1_fsize)
 
-        printf('%s',self[FileSystem_P1_buffor])
+        malloc(P1_fsize)
+mov P1_buffor, rax
+
+        
+
+        ReadFile(self[FileSystem_P1_handle], P1_buffor, P1_fsize, 0, 0)
+
+        printf('%s',P1_buffor)
 
         CloseHandle(self[FileSystem_P1_handle])
 
@@ -91,7 +75,7 @@ mov qword ptr self[FileSystem_P1_buffor], rax
 
 .data?
 
-P1_fs label FileSystem
+P1_fs dq ? 
 
 
 

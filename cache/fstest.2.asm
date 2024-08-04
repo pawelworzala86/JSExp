@@ -8,13 +8,6 @@ FileSystem_P1_fsize equ 1
 FileSystem_P1_buffor equ 2
 
 
-FileSystem STRUCT
-P1_handle QWORD ?
-P1_fsize QWORD ?
-P1_buffor QWORD ?
-FileSystem ENDS
-
-
     function FileSystem_constructor(self):2{
         self[FileSystem_P1_handle] = 0
         self[FileSystem_P1_fsize] = 0
@@ -23,18 +16,18 @@ FileSystem ENDS
     function FileSystem_ReadFileSync(self,fileName):2{
         self[FileSystem_P1_handle] = CreateFileA(fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0)
         //mov P1_handle, rax
-        self[FileSystem_P1_fsize] = GetFileSize(self[FileSystem_P1_handle], 0)
+        P1_fsize = GetFileSize(self[FileSystem_P1_handle], 0)
         //mov P1_fsize, rax
-        printf('P1_fsize %i',self[FileSystem_P1_fsize])
-        self[FileSystem_P1_buffor] = malloc(self[FileSystem_P1_fsize])
+        printf('P1_fsize %i',P1_fsize)
+        P1_buffor = malloc(P1_fsize)
         //mov P1_buffor, rax
-        ReadFile(self[FileSystem_P1_handle], &self[FileSystem_P1_buffor], &self[FileSystem_P1_fsize], 0, 0)
-        printf('%s',self[FileSystem_P1_buffor])
+        ReadFile(self[FileSystem_P1_handle], P1_buffor, P1_fsize, 0, 0)
+        printf('%s',P1_buffor)
         CloseHandle(self[FileSystem_P1_handle])
     :2}
 
 .data?
-P1_fs label FileSystem
+P1_fs dq ? 
 
 function P1_main():1{
     FileSystem_constructor(P1_fs)

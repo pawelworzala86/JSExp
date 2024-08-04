@@ -12,13 +12,13 @@ class FileSystem{
     ReadFileSync(fileName){
         this.handle = CreateFileA(fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0)
         //mov handle, rax
-        this.fsize = GetFileSize(this.handle, 0)
+        fsize = GetFileSize(this.handle, 0)
         //mov fsize, rax
-        printf('fsize %i',this.fsize)
-        this.buffor = malloc(this.fsize)
+        printf('fsize %i',fsize)
+        buffor = malloc(fsize)
         //mov buffor, rax
-        ReadFile(this.handle, &this.buffor, &this.fsize, 0, 0)
-        printf('%s',this.buffor)
+        ReadFile(this.handle, buffor, fsize, 0, 0)
+        printf('%s',buffor)
         CloseHandle(this.handle)
     }
 }

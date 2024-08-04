@@ -51,6 +51,7 @@ function Parse(source){
                     params.push({name:nm,value:val})
                     return m
                 })
+                body = 'mov '+CLASSName+', alloc('+params.length*8+')\n'+body
             }
             funcs.push(name)
             console.log(params)
@@ -69,13 +70,15 @@ function Parse(source){
 
         CLASSES[CLASSName] = {params,funcs,locals:[]}
 
-        var struct = CLASSName+' STRUCT\n'
+        /*var struct = CLASSName+' STRUCT\n'
         for(let param of params){
             struct += param.name+' QWORD ?\n'
         }
-        struct += CLASSName+' ENDS\n'
+        struct += CLASSName+' ENDS\n'*/
 
-        return pref+'\n\n'+struct+'\n\n'+match
+        //return pref+'\n\n'+struct+'\n\n'+match
+        //pref += '\n.data?\n'+CLASSName+' dq ?\n'
+        return pref+'\n\n'+match
     })
 
     console.log(CLASSES)
@@ -84,7 +87,7 @@ function Parse(source){
         var prop = match.split('=')[0].replace('var','').trim()
         var className = match.split('new')[1].replace('()','').trim()
         CLASSES[className].locals.push(prop)
-        return '.data?\n'+prop+' label '+className
+        return '.data?\n'+prop+' dq ? '//+className
     })
 
     console.log(CLASSES)
