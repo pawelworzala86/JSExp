@@ -1,6 +1,6 @@
 class innOBJ{
     constructor(){
-        this.varA = 2332
+        this.varA = 666
     }
     print(){
         printf("%i", this.varA)
@@ -10,9 +10,10 @@ class innOBJ{
 class OBJTest{
     constructor(){
         this.varA = 2332
-        //this.objA = new innOBJ()
+        this.objA = new innOBJ()
     }
     print(){
+        this.objA.print()
         printf("%i", this.varA)
     }
 }

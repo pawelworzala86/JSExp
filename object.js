@@ -51,7 +51,9 @@ function Parse(source){
                     params.push({name:nm,value:val})
                     return m
                 })
-                body = 'mov '+CLASSName+', alloc('+params.length*8+')\n'+body
+                //body = 'mov '+CLASSName+', alloc('+params.length*8+')\n'+body
+                mm=mm.replace(/(.*) = new (.*)\(\)/gm,
+                    '$2_constructor($1)')
             }
             funcs.push(name)
             console.log(params)
@@ -68,18 +70,27 @@ function Parse(source){
             //match=match.replace(new RegExp('self\\.'+param.name,'gm'),'self['+CLASSName+'_'+param.name+']')
         }*/
 
-        CLASSES[CLASSName] = {params,funcs,locals:[]}
+        CLASSES[CLASSName] = {params,funcs,locals:[],objs:[]}
 
         var struct = CLASSName+' STRUCT\n'
         for(let param of params){
             if(param.value.indexOf('new')>-1){
                 const obj = param.value.split('new')[1].split('(')[0].trim()
                 struct += param.name+' '+obj+' <>\n'
+                CLASSES[CLASSName].objs.push({name:param.name,obj})
             }else{
                 struct += param.name+' QWORD ?\n'
             }
         }
         struct += CLASSName+' ENDS\n'
+
+        console.log('OBJ',CLASSES[CLASSName].objs)
+
+        for(let obj of CLASSES[CLASSName].objs){
+            match=match.replace(
+                new RegExp('self\\.'+obj.name+'\\.(.*)\\((.*)','gm'),
+                obj.obj+'_$1(self.'+obj.name+',$2')
+        }
 
         return '\n\n'+struct+'\n\n'+match
         //pref += '\n.data?\n'+CLASSName+' dq ?\n'
