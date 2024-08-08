@@ -111,7 +111,7 @@ key+'_'+fun+'('+local+',')
     new RegExp(local+'(\\[[0-9]+\\])\\.'+fun+'\\(','gm'),
     key+'_'+fun+'('+local+'$1,')
             }
-            source=source.replace(new RegExp(local+'\\.([a-zA-Z0-9\_]+)','gm'),local+'['+key+'_$1'+']')
+            //source=source.replace(new RegExp(local+'\\.([a-zA-Z0-9\_]+)','gm'),local+'['+key+'_$1'+']')
         }
     }
 
