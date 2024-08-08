@@ -1,6 +1,6 @@
 
 //var handle = 0
-var fsize = 0
+//var fsize = 0
 //var buffor = 0
 
 class FileSystem{
@@ -24,6 +24,8 @@ class FileSystem{
 }
 
 var fs = new FileSystem()
+
+export fs
 
 function main(){
     fs.constructor()

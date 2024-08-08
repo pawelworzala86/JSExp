@@ -1,6 +1,6 @@
 
 //var handle = 0
-var fsize = 0
+//var fsize = 0
 //var buffor = 0
 
 class FileSystem{

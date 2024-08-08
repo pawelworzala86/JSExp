@@ -213,7 +213,11 @@ function Parse(file){
         }
         mm = mm.split('=')[0].trim()
         EXPORTS[getFI(file)].push(mm)
-        return match.replace('export ','')
+        var ret = match.replace('export ','')
+        if(ret.split(' ').length==1){
+            return ''
+        }
+        return ret
     })
 
     source = Obj(source)
