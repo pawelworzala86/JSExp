@@ -4,33 +4,19 @@
 
     include include\extern.inc
 
-    .data?
-arrayA dq ?
-
-.data
-    OBJ_A = 1
-	
-.code
-    P1_main macro 
-    
-    mov arrayA, alloc(24)
-
-    mov rax, 11
-    mov arrayA[OBJ_A], rax
-
-    mov rbx, arrayA[OBJ_A]
-    invoke printf, "%i", rbx
-
-    invoke printf, "OK"
-
-
-    endm
+    .data
+        valA dq  12
+        valB dq 12
 
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-
+.code
 entry_point proc
 
-    P1_main
+    IF valA eq valA
+        invoke printf, "IF"    
+    ENDIF
+
+    invoke printf, "OK"
 
     ;waitkey "  Press any key to continue ..."
 
