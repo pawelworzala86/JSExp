@@ -72,7 +72,12 @@ function Parse(source){
 
         var struct = CLASSName+' STRUCT\n'
         for(let param of params){
-            struct += param.name+' QWORD ?\n'
+            if(param.value.indexOf('new')>-1){
+                const obj = param.value.split('new')[1].split('(')[0].trim()
+                struct += param.name+' '+obj+' <>\n'
+            }else{
+                struct += param.name+' QWORD ?\n'
+            }
         }
         struct += CLASSName+' ENDS\n'
 
