@@ -3,6 +3,8 @@ const fs = require('fs')
 const Danger = require('./danger.js')
 const Obj = require('./object.js')
 
+// code of clousure scope
+
 
 function Blocks(source){
     let newSource = ''
@@ -239,6 +241,7 @@ function Parse(file){
 
     return source
 }
+
 
 var fileName = process.argv[2]
 

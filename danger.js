@@ -230,7 +230,7 @@ var parseSource = (source)=>{
         __IF('\\>','jg','jng')
 
         //var
-        /*match=match.replace( /var (.*)/gm, mmm=>{
+        match=match.replace( /var (.*)/gm, mmm=>{
             var name = mmm.split('=')[0].replace('var','').trim()
             var value = mmm.split('=')[1].trim()
             var type = 'QWORD'
@@ -238,9 +238,9 @@ var parseSource = (source)=>{
                 type = 'db'
                 value += ',0'
             }
-            LOCAL+='LOCAL '+name+':'+type+'\n'
-            return 'mov '+name+', '+value
-        })*/
+            LOCAL+='LOCAL '+name+'\n'//':'+type+'\n'
+            return ''+name+' rownasie '+value
+        })
 
 
         var first = match.split('{')[0]
@@ -736,6 +736,8 @@ mov [rcx+rbx]
     //r(/mov rax, invoke/gm,'invoke')
 
     r(/\\\\/gm,'')
+
+    r(/rownasie/gm,'=')
     
     
     return source
