@@ -688,11 +688,11 @@ mov [rcx+rbx]
 
 
     //arrays
-    source = source.replace(/([a-zA-Z0-9\_\.]+)\[([0-9]+)\]/gm,match=>{
+    /*source = source.replace(/([a-zA-Z0-9\_\.]+)\[([0-9]+)\]/gm,match=>{
         var param = match.split('[')[0]
         var index = match.split('[')[1].split(']')[0]
         return `qword ptr ${param} + ${index*8}`
-    })
+    })*/
 
     source = source.replace(/\n, rax/gm,', rax')
 

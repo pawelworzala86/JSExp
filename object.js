@@ -1,4 +1,4 @@
-//const fs=require('fs')
+const fs=require('fs')
 
 function Blocks(source){
     let newSource = ''
@@ -90,6 +90,14 @@ function Parse(source){
         return '.data?\n'+prop+' label '+className
     })
 
+    source = source.replace(/var (.*) = new (.*)\([0-9]+\)/gm,match=>{
+        var prop = match.split('=')[0].replace('var','').trim()
+        var className = match.split('new')[1].split('(')[0].trim()
+        CLASSES[className].locals.push(prop)
+        var count = parseInt(match.split('(')[1].split('('))
+        return `.data?\n    ${prop} ${className} ${count} dup\\\\({}\\\\)`
+    })
+
     console.log(CLASSES)
 
     for(let key of Object.keys(CLASSES)){
@@ -97,7 +105,11 @@ function Parse(source){
         for(let local of CLASS.locals){
             for(let fun of CLASS.funcs){
                 source=source.replace(
-new RegExp(local+'\\.'+fun+'\\(','gm'),key+'_'+fun+'('+local+',')
+new RegExp(local+'\\.'+fun+'\\(','gm'),
+key+'_'+fun+'('+local+',')
+            source=source.replace(
+    new RegExp(local+'(\\[[0-9]+\\])\\.'+fun+'\\(','gm'),
+    key+'_'+fun+'('+local+'$1,')
             }
             source=source.replace(new RegExp(local+'\\.([a-zA-Z0-9\_]+)','gm'),local+'['+key+'_$1'+']')
         }
@@ -111,6 +123,8 @@ new RegExp(local+'\\.'+fun+'\\(','gm'),key+'_'+fun+'('+local+',')
         match=match.replace(/P[0-9]+\_/gm,'')
         return match
     })
+
+    fs.writeFileSync('./cache/objobj.js',source)
 
     return source
 }

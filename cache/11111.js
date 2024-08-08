@@ -85,7 +85,7 @@ mov self.buffor, rax
 
 .data?
 
-P1_fs label FileSystem
+    P1_fs FileSystem 2 dup\\({}\\)
 
 
 
@@ -97,13 +97,13 @@ P1_fs label FileSystem
 
 
 
-    FileSystem_constructor(P1_fs)
+    FileSystem_constructor(P1_fs[0])
 
 
 
-    FileSystem_ReadFileSync(P1_fs,'default.frag')
+    FileSystem_ReadFileSync(P1_fs[0],'default.frag')
 
-    FileSystem_ReadFileSync(P1_fs,'default.vert')
+    FileSystem_ReadFileSync(P1_fs[0],'default.vert')
 
 :1
     endm
