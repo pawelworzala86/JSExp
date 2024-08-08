@@ -9,25 +9,29 @@
 	
 
 
-.data
-P1_handle dq 0
-.code
+
 
 .data
 P1_fsize dq 0
 .code
 
-.data
-P1_buffor dq 0
-.code
 
 
 
-FileSystem_P1_handle equ 0
 
-FileSystem_P1_fsize equ 1
 
-FileSystem_P1_buffor equ 2
+
+
+
+FileSystem STRUCT
+
+P1_handle QWORD ?
+
+P1_fsize QWORD ?
+
+P1_buffor QWORD ?
+
+FileSystem ENDS
 
 
 
@@ -41,14 +45,14 @@ FileSystem_P1_buffor equ 2
 
 
 
-mov rax, 0
-mov qword ptr self[FileSystem_P1_handle], rax
+        mov rax, 0
+mov self.P1_handle,rax
 
-mov rax, 0
-mov qword ptr self[FileSystem_P1_fsize], rax
+        mov rax, 0
+mov self.P1_fsize,rax
 
-mov rax, 0
-mov qword ptr self[FileSystem_P1_buffor], rax
+        mov rax, 0
+mov self.P1_buffor,rax
 
     
     endm
@@ -61,29 +65,28 @@ mov qword ptr self[FileSystem_P1_buffor], rax
 
 
 
-invoke CreateFileA, fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0
-mov qword ptr qword ptr self[FileSystem_P1_handle], rax
-
-
-        
-
-        invoke GetFileSize, qword ptr self[FileSystem_P1_handle], 0
-mov P1_fsize, rax
+        invoke CreateFileA, fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0
+mov self.P1_handle, rax
 
         
 
-        invoke printf, "P1_fsize %i",P1_fsize
-
-        invoke malloc, P1_fsize
-mov P1_buffor, rax
+        invoke GetFileSize, self.P1_handle, 0
+mov self.P1_fsize, rax
 
         
 
-        invoke ReadFile, qword ptr self[FileSystem_P1_handle], P1_buffor, P1_fsize, 0, 0
+        invoke printf, "P1_fsize %i",self.P1_fsize
 
-        invoke printf, "%s",P1_buffor
+        invoke malloc, self.P1_fsize
+mov self.P1_buffor, rax
 
-        invoke CloseHandle, qword ptr self[FileSystem_P1_handle]
+        
+
+        invoke ReadFile, self.P1_handle, self.P1_buffor, self.P1_fsize, 0, 0
+
+        invoke printf, "%s",self.P1_buffor
+
+        invoke CloseHandle, self.P1_handle
 
     
     endm
@@ -92,7 +95,7 @@ mov P1_buffor, rax
 
 .data?
 
-P1_fs dq ? 
+P1_fs label FileSystem
 
 
 

@@ -60,25 +60,25 @@ function Parse(source){
             mm=mm.replace(/this/gm,'self')
             return mm
         })
-        var pref = ''
+        /*var pref = ''
         var idx = 0
         for(let param of params){
             pref+=CLASSName+'_'+param.name+' equ '+idx+'\n'
             idx++
-            match=match.replace(new RegExp('self\\.'+param.name,'gm'),'self['+CLASSName+'_'+param.name+']')
-        }
+            //match=match.replace(new RegExp('self\\.'+param.name,'gm'),'self['+CLASSName+'_'+param.name+']')
+        }*/
 
         CLASSES[CLASSName] = {params,funcs,locals:[]}
 
-        /*var struct = CLASSName+' STRUCT\n'
+        var struct = CLASSName+' STRUCT\n'
         for(let param of params){
             struct += param.name+' QWORD ?\n'
         }
-        struct += CLASSName+' ENDS\n'*/
+        struct += CLASSName+' ENDS\n'
 
-        //return pref+'\n\n'+struct+'\n\n'+match
+        return '\n\n'+struct+'\n\n'+match
         //pref += '\n.data?\n'+CLASSName+' dq ?\n'
-        return pref+'\n\n'+match
+        //return pref+'\n\n'+match
     })
 
     console.log(CLASSES)
@@ -87,7 +87,7 @@ function Parse(source){
         var prop = match.split('=')[0].replace('var','').trim()
         var className = match.split('new')[1].replace('()','').trim()
         CLASSES[className].locals.push(prop)
-        return '.data?\n'+prop+' dq ? '//+className
+        return '.data?\n'+prop+' label '+className
     })
 
     console.log(CLASSES)
