@@ -25,11 +25,11 @@ P1_fsize dq 0
 
 FileSystem STRUCT
 
-P1_handle QWORD ?
+handle QWORD ?
 
-P1_fsize QWORD ?
+fsize QWORD ?
 
-P1_buffor QWORD ?
+buffor QWORD ?
 
 FileSystem ENDS
 
@@ -46,13 +46,13 @@ FileSystem ENDS
 
 
         mov rax, 0
-mov self.P1_handle,rax
+mov self.handle,rax
 
         mov rax, 0
-mov self.P1_fsize,rax
+mov self.fsize,rax
 
         mov rax, 0
-mov self.P1_buffor,rax
+mov self.buffor,rax
 
     
     endm
@@ -66,27 +66,27 @@ mov self.P1_buffor,rax
 
 
         invoke CreateFileA, fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0
-mov self.P1_handle, rax
+mov self.handle, rax
 
         
 
-        invoke GetFileSize, self.P1_handle, 0
-mov self.P1_fsize, rax
+        invoke GetFileSize, self.handle, 0
+mov self.fsize, rax
 
         
 
-        invoke printf, "P1_fsize %i",self.P1_fsize
+        invoke printf, "P1_fsize %i",self.fsize
 
-        invoke malloc, self.P1_fsize
-mov self.P1_buffor, rax
+        invoke malloc, self.fsize
+mov self.buffor, rax
 
         
 
-        invoke ReadFile, self.P1_handle, self.P1_buffor, self.P1_fsize, 0, 0
+        invoke ReadFile, self.handle, self.buffor, self.fsize, 0, 0
 
-        invoke printf, "%s",self.P1_buffor
+        invoke printf, "%s",self.buffor
 
-        invoke CloseHandle, self.P1_handle
+        invoke CloseHandle, self.handle
 
     
     endm

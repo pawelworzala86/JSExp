@@ -15,11 +15,11 @@ var P1_fsize = 0
 
 FileSystem STRUCT
 
-P1_handle QWORD ?
+handle QWORD ?
 
-P1_fsize QWORD ?
+fsize QWORD ?
 
-P1_buffor QWORD ?
+buffor QWORD ?
 
 FileSystem ENDS
 
@@ -36,13 +36,13 @@ FileSystem ENDS
 
 
         mov rax, 0
-mov self.P1_handle,rax
+mov self.handle,rax
 
         mov rax, 0
-mov self.P1_fsize,rax
+mov self.fsize,rax
 
         mov rax, 0
-mov self.P1_buffor,rax
+mov self.buffor,rax
 
     :2
     endm
@@ -56,27 +56,27 @@ mov self.P1_buffor,rax
 
 
         CreateFileA(fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0)
-mov self.P1_handle, rax
+mov self.handle, rax
 
         
 
-        GetFileSize(self.P1_handle, 0)
-mov self.P1_fsize, rax
+        GetFileSize(self.handle, 0)
+mov self.fsize, rax
 
         
 
-        printf('P1_fsize %i',self.P1_fsize)
+        printf('P1_fsize %i',self.fsize)
 
-        malloc(self.P1_fsize)
-mov self.P1_buffor, rax
+        malloc(self.fsize)
+mov self.buffor, rax
 
         
 
-        ReadFile(self.P1_handle, self.P1_buffor, self.P1_fsize, 0, 0)
+        ReadFile(self.handle, self.buffor, self.fsize, 0, 0)
 
-        printf('%s',self.P1_buffor)
+        printf('%s',self.buffor)
 
-        CloseHandle(self.P1_handle)
+        CloseHandle(self.handle)
 
     :2
     endm

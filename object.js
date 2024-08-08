@@ -105,7 +105,12 @@ new RegExp(local+'\\.'+fun+'\\(','gm'),key+'_'+fun+'('+local+',')
 
     source=source.replace(/\,\)/gm,')')
 
+    source=source.replace(/\.P[0-9]+\_/gm,'.')
 
+    source=source.replace(/STRUCT([\s\S]+?)ENDS/gm,match=>{
+        match=match.replace(/P[0-9]+\_/gm,'')
+        return match
+    })
 
     return source
 }
