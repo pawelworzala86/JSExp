@@ -12,35 +12,14 @@ stp2 dq 0
 
 
 .data
-mth1 dq 0.0
-.code
-
-.data
-mth2 dq 0.0
-.code
-
-.data
-mth3 dq 0.0
-.code
-
-.data
-mth4 dq 0.0
-.code
-
-.data
-mth5 dq 0.0
-.code
-
-.data
-mth6 dq 0.0
-.code
-
-.data
-mth7 dq 0.0
-.code
-
-.data
-mth8 dq 0.0
+    mth1 dq 0.0
+    mth2 dq 0.0
+    mth3 dq 0.0
+    mth4 dq 0.0
+    mth5 dq 0.0
+    mth6 dq 0.0
+    mth7 dq 0.0
+    mth8 dq 0.0
 .code
 
 
