@@ -4,6 +4,8 @@
 
     include ..\include\extern.inc
 
+    include ..\include\math.asm
+
     .code
 
 	{{INIT}}
