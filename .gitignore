@@ -1,0 +1,4 @@
+/cache/*.asm
+/cache/*.js
+/cache/*.obj
+/cache/*.exe
