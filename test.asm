@@ -12,6 +12,10 @@
 .code
 entry_point proc
 
+    .IF valA eq valA
+        invoke printf, "IF"    
+    ENDIF
+
     IF valA eq valA
         invoke printf, "IF"    
     ENDIF
