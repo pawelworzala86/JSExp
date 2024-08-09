@@ -9,9 +9,13 @@ function tst(){
         printf("%s", "OK")
     }*/
 
-    for(indexFor = 0;indexFor<ForEnd;indexFor = indexFor + StepFor){
+    for(indexFor = 0;indexFor<ForEnd;indexFor++){
         printf("%s", "OK")
     }
+
+    /*for(index=0;index<15;index++){
+        printf('ii')
+    }*/
 
 }
 

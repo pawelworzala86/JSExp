@@ -23,7 +23,7 @@ function ignoreName(name){
     return ignoredFunctions.includes(name)
 }
 
-
+/*
 function ParseBlocks(ROOTSource){
 
     //this.ROOT.source = ''
@@ -64,7 +64,7 @@ function ParseBlocks(ROOTSource){
 
     return source
 
-}
+}*/
 
 var parseSource = (source)=>{
 
@@ -160,6 +160,22 @@ var parseSource = (source)=>{
     source = source.replace(/function(.*)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
 
         var LOCAL = ''
+
+        //FOR closed
+        /*match = match.replace(/\bfor([\s\S]+?)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
+            var head=match.split('(')[1].split(')')[0].trim().split(';')
+            var body=match.split('{')[1]
+            body=body.substring(0,body.length-6)
+            blockIndex++
+            var idxName = head[0].split('=')[0].trim()
+            LOCAL += 'LOCAL '+idxName+'\n'
+            head[0]=head[0].replace('=',' = ')
+            return `${head[0]}
+            while(${head[1]}):${blockIndex}{
+                ${head[2]}
+                ${body}
+            :${blockIndex}}`
+        })*/
 
         //FOR
         match = match.replace(/\bfor([\s\S]+?)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
