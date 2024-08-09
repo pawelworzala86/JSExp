@@ -17,7 +17,7 @@ function tst(){
 
 }
 
-function start(){
+function main(){
 
     tst()
 

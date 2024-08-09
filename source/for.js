@@ -1,5 +1,3 @@
-import 'math.js'
-
 var indexFor = 0
 var ForEnd = 10
 var StepFor = 1
@@ -17,7 +15,7 @@ function tst(){
 
 }
 
-function start(){
+function main(){
 
     tst()
 
