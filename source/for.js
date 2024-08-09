@@ -9,7 +9,7 @@ function tst(){
         printf("%s", "OK")
     }*/
 
-    for(indexFor = 0;indexFor<ForEnd;indexFor++){
+    for(indexFor = 0;indexFor<15;indexFor++){
         printf("%s", "OK")
     }
 
