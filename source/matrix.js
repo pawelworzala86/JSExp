@@ -1,4 +1,4 @@
-var matA = NULL
+var matA = [0.0,0.0,0.0,0.0, 0.0,0.0,0.0,0.0, 0.0,0.0,0.0,0.0, 0.0,0.0,0.0,0.0]
 
 var matrixZero = 0.0
 var matrixOne = 1.0
@@ -33,13 +33,21 @@ function mat4_identity(out){
     out[14] = matrixZero
     out[15] = matrixOne
 }
+function mat4_print(mat){
+    printf('%f', mat[0])
+    printf(', %f', mat[1])
+    printf(', %f', mat[2])
+    printf(', %f', mat[3])
+}
 
 
 function main(){
 
-    matA = mat4_create()
+    //matA = mat4_create()
 
     mat4_identity(matA)
+
+    mat4_print(matA)
 
     printf('ok')
 }
