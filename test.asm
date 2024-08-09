@@ -8,6 +8,10 @@
         valA dq  12
         valB dq 12
 
+    .data
+        url db "http://example.com/file.txt", 0
+        file db "C:\path\to\save\file.txt", 0
+
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 .code
 entry_point proc

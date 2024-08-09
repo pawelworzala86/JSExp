@@ -1,5 +1,4 @@
-.data?
-    matA dq ?
+var matA = NULL
 
 function main(){
     printf('ok')
