@@ -23,59 +23,13 @@ function ignoreName(name){
     return ignoredFunctions.includes(name)
 }
 
-/*
-function ParseBlocks(ROOTSource){
-
-    //this.ROOT.source = ''
-    var iteration = 1
-    var source = ''
-
-    for(let i=0;i<ROOTSource.length;i++){
-
-        var char = ROOTSource[i]
-
-        if(char=='{'){
-            source+=':'+iteration+'{'
-            iteration++
-        }else if(char=='}'){
-            iteration--
-            source+=':'+(iteration)+'}'
-        }else{
-            source+=char
-        }
-
-    }
-
-    let uniuque = 1024
-    let index = 1
-    while(1024 > index){
-        tmp = ' '+source
-        while(tmp != source){
-            tmp = source
-            source = source
-                .replace(':'+index+'{',':'+uniuque+'{')
-                .replace(':'+index+'}',':'+uniuque+'}')
-            if((tmp != source)){
-                uniuque++
-            }
-        }
-        index++
-    }
-
-    return source
-
-}*/
-
 var parseSource = (source)=>{
-
-
 
     var r=(match,replace)=>{
         source = source.replace(match,replace)
     }
 
 
-    //source = ParseBlocks(source)
 
     
     //clean code
@@ -161,22 +115,6 @@ var parseSource = (source)=>{
     source = source.replace(/function(.*)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
 
         var LOCAL = ''
-
-        //FOR closed
-        /*match = match.replace(/\bfor([\s\S]+?)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
-            var head=match.split('(')[1].split(')')[0].trim().split(';')
-            var body=match.split('{')[1]
-            body=body.substring(0,body.length-6)
-            blockIndex++
-            var idxName = head[0].split('=')[0].trim()
-            LOCAL += 'LOCAL '+idxName+'\n'
-            head[0]=head[0].replace('=',' = ')
-            return `${head[0]}
-            while(${head[1]}):${blockIndex}{
-                ${head[2]}
-                ${body}
-            :${blockIndex}}`
-        })*/
 
         //FOR
         match = match.replace(/\bfor([\s\S]+?)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
@@ -385,148 +323,6 @@ ${name} dq ${data}
     r(/(this\.[a-zA-Z0-9]+)\ \=\ ([a-zA-Z0-9\_\.]+\(.*)/gm,'$2\nmov $1, rax')
 
 
-/*
-    source = source.replace(/import(.*)/gm,match=>{
-        match=match.replace(/\'/gm,'')
-        if(match.indexOf('.inc')>-1){
-            match=match.replace('import','include')
-        }
-        if(match.indexOf('.lib')>-1){
-            match=match.replace('import','includelib')
-        }
-        if(match.indexOf('.js')>-1){
-            const name=match.replace('import ','')
-            const data = fs.readFileSync('./source/'+name).toString()
-            //return parseSource(data)
-            var parts = name.split('/')
-            console.log('parts',parts)
-            if(parts.length>1){
-                try{
-                fs.mkdirSync('./cache/'+parts[0])
-                }catch(e){}
-            }
-            fs.writeFileSync('./cache/'+name.replace('.js','.asm'),parseSource(data))
-            match=match.replace('.js','.asm')
-        }
-        match=match.replace('import','include').replace(/\//gm,'\\')
-        return match
-    })
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-    source = source.replace(/^class([\s\S]+?)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,match=>{
-        var name = match.split(' ')[1].replace('{','').trim().split(':')[0]
-        console.log('name:::',name)
-        const fields=[]
-        const fields2=[]
-        const funcs={}
-        match=match.replace(/constructor\(\)(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,mmm=>{
-            mmm.replace(/this\.(.*)/gm,m=>{
-                var field=m.replace('this.','')
-                field=field.split('=')[0]+'QWORD ?'
-                var field2=m.replace('this.','')
-                fields2.push(field2.replace('=','dq').replace('[','').replace(']',''))
-                fields.push(field)
-                console.log('FLD ',fields,fields2)
-            })
-            var bdy=fields2.map(field=>{
-                return 'this.'+field.replace('dq','=')
-            }).join('\n')
-            funcs['constructor'] = {data:bdy,params:[]}
-            return ''
-        })
-        match=match.replace(/[a-zA-Z0-9]+\(.*(?<num>\:[0-9]+)\{([\s\S]+?)(\k<num>)\}/gm,mmm=>{
-            var fname=mmm.split('(')[0].trim().substring(-5)
-            var params=mmm.split('(')[1].split(')')[0].trim()
-            var data=mmm.split('{')[1]
-            //try{
-            data=data.substring(0,data.length-6)
-            //}catch(e){}
-            console.log('DATA:::',fname,data)
-            funcs[fname] = {data:data,params}
-            return ''
-        })
-
-        console.log('funcs:::',funcs)
-
-        OBJECTS[name]={name,fields:fields2,funcs,params:[]}
-
-        var functions = []
-        for(const func of Object.keys(funcs)){
-            var FUNC = funcs[func]
-            var data = FUNC.data
-            var params = FUNC.params
-            params=params.length?(','+params):''
-            //var index = 0
-            try{
-            data = data.replace(/this\.([a-zA-Z0-9\_]+)\(/gm,name+'_$1(self,')
-        }catch(e){}
-            console.log(data)
-            functions.push('function '+name+'_'+func+'(this'+params+'){\n'+data+'\n}\n')
-        }
-        console.log(functions)
-
-        return `.code
-        ${name} STRUCT
-            ${fields.join('\n')}
-        ${name} ENDS
-        ${functions.join('\n')}`
-    })
-    //fs.writeFileSync('./cache/objected.js',source)
-    console.log('OBJECTS',OBJECTS)
-    source = source.replace(/var [a-zA-Z0-9]+ = new [a-zA-Z0-9]+\(([0-9]+)\)/gm,match=>{
-        var params = match.split(' ')
-        var count = parseInt(match.split('(')[1].split(')')[0].trim())
-        var name = match.split('=')[1].split('(')[0].replace('new','').trim()
-        var OBJ=OBJECTS[name]
-        console.log('params',params)
-        OBJ.params.push(params[1])
-        return `.data?\n    ${params[1]} ${name} ${count} dup\\\\({}\\\\)`
-    })
-    source = source.replace(/var [a-zA-Z0-9]+ = new [a-zA-Z0-9]+\(\)/gm,match=>{
-        var params = match.split(' ')
-        var OBJ=OBJECTS[params[4].replace('()','')]
-        console.log('params',params)
-        OBJ.params.push(params[1])
-        return `.data?\n    ${params[1]} label ${params[4].replace('()','')}`
-    })
-    for(const key of Object.keys(OBJECTS)){
-        var OBJ = OBJECTS[key]
-        for(const param of OBJ.params){
-            //var FUNC = OBJ.funcs[func]
-            source = source.replace(new RegExp(param+'\\[[0-9]+\\]\\.[a-zA-Z0-9\_]+\\(','gm'),match=>{
-                var obj = match.split('.')[0]
-                var func = match.split('.')[1].split('(')[0]
-                return `${key}_${func}(${obj},`
-            })
-            source = source.replace(new RegExp(param+'\\.[a-zA-Z0-9\_]+\\(','gm'),match=>{
-                var obj = match.split('.')[0]
-                var func = match.split('.')[1].split('(')[0]
-                return `${key}_${func}(${obj},`
-            })
-        }
-    }
-    r(/this/gm,'self')
-
-    //fs.writeFileSync('./cache/objected2.js',source)
-
-*/
-
-
-
 
 
 
@@ -691,26 +487,6 @@ mov rax,[rbx+rcx]
 
 
 
-
-
-/*
-    source = source.replace(/([a-zA-Z0-9\_]+)\[([a-zA-Z\_]+)\]/gm,match=>{
-        var params1 = /([a-zA-Z0-9\_]+)/gm.exec(match)[1]
-        var params2 = /([a-zA-Z\_]+)/gm.exec(match)[1]
-        return `rbx,${params1}
-        mov rcx,${params2}
-mov [rcx+rbx]
-`
-    })*/
-
-
-    //arrays
-    /*source = source.replace(/([a-zA-Z0-9\_\.]+)\[([0-9]+)\]/gm,match=>{
-        var param = match.split('[')[0]
-        var index = match.split('[')[1].split(']')[0]
-        return `qword ptr ${param} + ${index*8}`
-    })*/
-
     source = source.replace(/\n, rax/gm,', rax')
 
     source = source.replace(/_asm/gm,'.asm')
@@ -759,57 +535,6 @@ mov [rcx+rbx]
     
     return source
 }
-
-//var code = parseSource(sourceOrigin)
-
-
-/*var entry_point = `    entry_point proc 
-
-    start
-
-    invoke ExitProcess, 0
-
-    ret
-    entry_point endp`
-if(code.indexOf('window.asm')>-1){
-    entry_point=''
-}
-
-var sourceToS = `include \\masm64\\include64\\masm64rt.inc
-include \\masm64\\include64\\opengl32.inc
-include \\masm64\\include64\\glu32.inc
-
-include \\DangerJS\\include\\opengl.inc
-include \\DangerJS\\include\\requires.inc
-
-includelib \\masm64\\lib64\\opengl32.lib
-includelib \\masm64\\lib64\\glu32.lib
-
-include \\DangerJS\\include\\extern.inc
-
-include \\DangerJS\\include\\math.asm
-
-.data?
-
-prm1 dq ?
-prm2 dq ?
-prm3 dq ?
-prm4 dq ?
-
-.code
-
-
-`+code+`
-
-
-    ${entry_point}
-
-
-
-    end
-`
-
-fs.writeFileSync('./cache/'+fileName+'.asm', sourceToS)*/
 
 
 module.exports = parseSource
