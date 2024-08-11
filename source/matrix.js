@@ -15,7 +15,7 @@ function mat4_identity(out){
     }*/
     out[0] = matrixOne
     out[1] = matrixZero
-    out[2] = matrixZero
+    /*out[2] = matrixZero
     out[3] = matrixZero
 
     out[4] = matrixZero
@@ -31,13 +31,13 @@ function mat4_identity(out){
     out[12] = matrixZero
     out[13] = matrixZero
     out[14] = matrixZero
-    out[15] = matrixOne
+    out[15] = matrixOne*/
 }
 function mat4_print(mat){
     printf('%f', mat[0])
     printf(', %f', mat[1])
-    printf(', %f', mat[2])
-    printf(', %f', mat[3])
+    //printf(', %f', mat[2])
+    //printf(', %f', mat[3])
 }
 
 

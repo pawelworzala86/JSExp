@@ -519,6 +519,12 @@ mov rax,[rbx+rcx]
     r(/mov rax, invoke /gm,'invoke ')
 
     r(/(\b)([a-zA-Z0-9\_]+)\[/gm,'qword ptr $1$2[')
+
+    r(/(\b)([a-zA-Z0-9\_]+)\[([0-9]+)\]/gm,match=>{
+        var name = match.split('[')[0].trim()
+        var index = parseInt(match.split('[')[1].split(']')[0].trim())*8
+        return `${name}[${index}]`
+    })
     
     //qword ptr self +qword ptr 1 + 0
 
