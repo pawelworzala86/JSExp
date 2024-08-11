@@ -7,10 +7,10 @@ var matrixOneMinus = -1.0
 
 var matIndex = 0
 
-function mat4_create(out){
+function create(out){
     out = malloc(16*8)
 }
-function mat4_identity(out){
+function identity(out){
     for(matIndex = 0;matIndex<16;matIndex++){
         out[matIndex] = matrixZero
     }
@@ -19,7 +19,7 @@ function mat4_identity(out){
     out[10] = matrixOne
     out[15] = matrixOne
 }
-function mat4_print(caption,mat){
+function print(caption,mat){
     printf('%s %s',caption, lf)
     printf('%f', mat[0])
     printf(', %f', mat[1])
@@ -47,7 +47,7 @@ var mfv = 0.0
 var fff = 0.0
 var nf = 0.0
 var nfA = 0.0
-function mat4_perspectiveNO(out,fovy,aspect,near,far){
+function perspective(out,fovy,aspect,near,far){
     mfv = fovy / matrixTwo
     Macro_Math_tan(mfv, mtan)
     fff = matrixOne / mtan
@@ -86,13 +86,13 @@ var far = 1000.0
 
 function main(){
 
-    mat4_create(matA)
+    create(matA)
 
-    mat4_identity(matA)
-    mat4_print('mat4_identity',matA)
+    identity(matA)
+    print('identity',matA)
 
-    mat4_perspectiveNO(matA,fovy,aspect,near,far)
-    mat4_print('mat4_perspectiveNO',matA)
+    perspective(matA,fovy,aspect,near,far)
+    print('perspectiveNO',matA)
 
     printf('ok')
 }
