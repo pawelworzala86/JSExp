@@ -176,8 +176,9 @@ function Parse(file){
     })
 
     for(let key of Object.keys(IMP)){
-        var IMP = IMP[key]
-        IMP.map(name=>{
+        console.log('IMP',IMP)
+        var IMPl = IMP[key]
+        IMPl.map(name=>{
             r(new RegExp('(\\b)'+name.target+'(\\b)','gm'),'$1P'+key+'_'+name.from+'$2')
         })
     }

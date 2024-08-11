@@ -7,10 +7,10 @@ var matrixOneMinus = -1.0
 
 var matIndex = 0
 
-function create(out){
+export function create(out){
     out = malloc(16*8)
 }
-function identity(out){
+export function identity(out){
     for(matIndex = 0;matIndex<16;matIndex++){
         out[matIndex] = matrixZero
     }
@@ -19,7 +19,7 @@ function identity(out){
     out[10] = matrixOne
     out[15] = matrixOne
 }
-function print(caption,mat){
+export function print(caption,mat){
     printf('%s %s',caption, lf)
     printf('%f', mat[0])
     printf(', %f', mat[1])
@@ -47,7 +47,7 @@ var mfv = 0.0
 var fff = 0.0
 var nf = 0.0
 var nfA = 0.0
-function perspective(out,fovy,aspect,near,far){
+export function perspective(out,fovy,aspect,near,far){
     mfv = fovy / matrixTwo
     Macro_Math_tan(mfv, mtan)
     fff = matrixOne / mtan
