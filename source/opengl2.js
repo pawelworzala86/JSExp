@@ -9,10 +9,12 @@ var VAO = 0
 var bufferID = 0
 
 var projectionMatrix = [1.3737387097273113,0.0,0.0,0.0,0.0,1.3737387097273113,0.0,0.0,0.0,0.0,-1.02020202020202,-1.0,0.0,0.0,-2.0202020202020203,0.0]
-var cameraMatrix = [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,-2.100090086,1.0]
+var cameraMatrix = Array(16)//[1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,-2.100090086,1.0]
 var modelMatrix = Array(16)//[1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]
 
+var cameraVector = [0.0,0.0,-2.1]
 
+var emptyMatrix = Array(16)
 
 function CreateBuffer(posID,ssize,sssize,length,array){
 	//lea rax, bufferID
@@ -89,9 +91,18 @@ function SystemInit(){
     glBindVertexArray(0)
 
 
+    matrix.create(emptyMatrix)
+    matrix.identity(emptyMatrix)
+
     matrix.create(modelMatrix)
     matrix.identity(modelMatrix)
     matrix.print('modelMatrix',modelMatrix)
+
+    //identity(matA)
+    //identity(matB)
+    matrix.translate(cameraMatrix,emptyMatrix,cameraVector)
+    matrix.print('cameraMatrix',cameraMatrix)
+
     //matrix.create(cameraMatrix)
     //matrix.identity(cameraMatrix)
 }

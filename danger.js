@@ -41,6 +41,7 @@ var parseSource = (source)=>{
 
     r(/var (.*) \= Array\(([0-9]+)\)/gm,'.data\n$1 dq $2 dup\\\\(0.0\\\\)')
 
+    r(/var (.*) \= ([0-9\.\-]+)/gm,'.data\n$1 dq $2')
 
 /*
     //              & and inline functions

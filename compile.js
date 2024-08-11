@@ -55,11 +55,21 @@ function Parse(file){
     //source = Obj(source)
 
 
+    
+    r(/\)\ \{/gm,'){')
+
+
+
+    
+
     source = Blocks(source)
 
     function r(reg,func){
         source = source.replace(reg,func)
     }
+
+
+
 
 
 
