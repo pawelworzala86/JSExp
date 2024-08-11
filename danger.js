@@ -525,6 +525,8 @@ mov rax,[rbx+rcx]
         var index = parseInt(match.split('[')[1].split(']')[0].trim())*8
         return `${name}[${index}]`
     })
+
+    r(/(.*)\b([a-zA-Z0-9\_]+)\[([a-zA-Z0-9\_]+)\]/gm,'mov rbx, $3\n$1[$2+rbx]')
     
     //qword ptr self +qword ptr 1 + 0
 

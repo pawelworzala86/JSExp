@@ -8,7 +8,7 @@ cd cache
 
 ml64.exe /c %1.asm
 
-link.exe /SUBSYSTEM:CONSOLE /MACHINE:X64 /ENTRY:entry_point /nologo /LARGEADDRESSAWARE %1.obj
+link.exe /SUBSYSTEM:CONSOLE /MACHINE:X64 /ENTRY:entry_point /nologo /LARGEADDRESSAWARE:NO %1.obj
 
 cd ..
 
