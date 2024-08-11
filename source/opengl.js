@@ -1,4 +1,4 @@
-import * as fs from './fs.js'
+import {fs} from './file.js'
 
 var vertices = [1.0,0.9,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0]
 var vertices2 = [1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0]
@@ -6,6 +6,12 @@ var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
 
 var VAO = 0
 var bufferID = 0
+
+var projectionMatrix = [1.3737387097273113,0.0,0.0,0.0,0.0,1.3737387097273113,0.0,0.0,0.0,0.0,-1.02020202020202,-1.0,0.0,0.0,-2.0202020202020203,0.0]
+var cameraMatrix = [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,-2.100090086,1.0]
+var modelMatrix = [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0]
+
+
 
 function CreateBuffer(posID,ssize,sssize,length,array){
 	//lea rax, bufferID
@@ -81,7 +87,30 @@ function SystemInit(){
 
     glBindVertexArray(0)
 }
+
+
+
+var uniformLocation = 0
+
+function MacroSetUniform1i(program,name,value){
+    uniformLocation = gl.GetUniformLocation(program, name)
+        //printf("uniformLocation=%i",uniformLocation)
+    gl.Uniform1i(uniformLocation, value)
+}
+
+function MacroSetUniformMatrix(program,name,value){
+    uniformLocation = gl.GetUniformLocation(program, name)
+    //if(uniformLocation > -1){
+        gl.UniformMatrix4dv(uniformLocation, 1, 0, &value)
+    //}
+}
+
+
 function SystemRender(){
+    MacroSetUniformMatrix(programID, 'd_projection', projectionMatrix)
+    MacroSetUniformMatrix(programID, 'd_camera', cameraMatrix)
+    MacroSetUniformMatrix(programID, 'd_model', modelMatrix)
+
     glBindVertexArray(VAO)
 	glDrawArrays(GL_TRIANGLES, 0, 6)
 }
