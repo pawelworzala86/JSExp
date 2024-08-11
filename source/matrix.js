@@ -13,6 +13,7 @@ function mat4_identity(out){
     for(matIndex = 0;matIndex<16;matIndex++){
         out[matIndex] = matrixZero
     }
+    out[0] = matrixOne
     //out[0] = matrixOne
     //out[1] = matrixZero
     /*out[2] = matrixZero
