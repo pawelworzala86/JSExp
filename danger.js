@@ -36,6 +36,25 @@ var parseSource = (source)=>{
     source = source.replace(/\/\/[\s\S]+?$/gm,'')
     source = source.replace(/\/\*[\s\S]+?\*\//gm,'')
 
+
+
+
+
+    
+    r(/var (.*) = (.*)/gm,match=>{
+        //console.log('TYPE',match)
+        var name=match.split('=')[0].replace('var','').trim()
+        var val=match.split('=')[1].trim()
+        if(val.indexOf('.')>0){
+            //console.log('float')
+            TYPES[name] = 'float'
+        }else{
+            //console.log('int')
+            TYPES[name] = 'int'
+        }
+        return match
+    })
+
     r(/var (.*) \= \[(.*)\]/gm,'.data\n$1 dq $2')
     r(/var (.*) \= NULL/gm,'.data?\n$1 dq ?')
 
@@ -240,19 +259,6 @@ var parseSource = (source)=>{
 
 
 
-    r(/var (.*) = (.*)/gm,match=>{
-        //console.log('TYPE',match)
-        var name=match.split('=')[0].replace('var','').trim()
-        var val=match.split('=')[1].trim()
-        if(val.indexOf('.')>0){
-            //console.log('float')
-            TYPES[name] = 'float'
-        }else{
-            //console.log('int')
-            TYPES[name] = 'int'
-        }
-        return match
-    })
 
     
     

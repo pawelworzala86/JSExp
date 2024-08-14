@@ -22,6 +22,13 @@ var far = 1000.0
 var emptyMatrix = Array(16)
 
 
+var vertNums = 3
+var coordNums = 2
+var bytes = 8
+var vertLenght = 18
+var coordLength = 12
+var vertSize = 0
+var coordSize = 0
 
 class Mesh{
     constructor(){
@@ -31,7 +38,9 @@ class Mesh{
         glGenVertexArrays(1, &this.VAO)
         glBindVertexArray(this.VAO)
 
-        CreateBuffer(0,3,3*8,18*8,vertices)
+        vertSize = vertLenght * bytes
+
+        CreateBuffer(0,3,3*8,vertSize,vertices)
         CreateBuffer(1,2,2*8,12*8,coords)
 
         printf('after')
