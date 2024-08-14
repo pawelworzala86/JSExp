@@ -37,15 +37,15 @@ class Mesh{
     constructor(){
         this.VAO = 0
     }
-    createGeometry(){
+    createGeometry(verts,coordsBu){
         glGenVertexArrays(1, &this.VAO)
         glBindVertexArray(this.VAO)
 
         vertSize = vertLenght * bytes
         coordSize = coordLength * bytes
 
-        CreateBuffer(0,vertNums,vertSingleSize,vertSize,vertices)
-        CreateBuffer(1,coordNums,coordSingleSize,coordSize,coords)
+        CreateBuffer(0,vertNums,vertSingleSize,vertSize,verts)
+        CreateBuffer(1,coordNums,coordSingleSize,coordSize,coordsBu)
 
         printf('after')
 
@@ -72,7 +72,7 @@ function CreateBuffer(posID,ssize,sssize,length,array){
 
 	glBindBuffer(GL_ARRAY_BUFFER, bufferID)
     printf('2')
-    glBufferData(GL_ARRAY_BUFFER, length, &array,GL_STATIC_DRAW)
+    glBufferData(GL_ARRAY_BUFFER, length, array,GL_STATIC_DRAW)
     
     printf('2')
 
@@ -88,6 +88,8 @@ var programID = 0
 
 
 
+var vertsBuff = NULL
+var coordsBuff = NULL
 
 function SystemInit(){
 
@@ -132,7 +134,17 @@ function SystemInit(){
 
     meshes[0].constructor()
 
-    meshes[0].createGeometry()
+    fs.Open('model.bin')
+    fs.Read(144)
+    vertsBuff = fs.buffor
+
+    fs.Read(96)
+    coordsBuff = fs.buffor
+
+    meshes[0].createGeometry(vertsBuff,coordsBuff)
+
+    fs.Close()
+
     /*glGenVertexArrays(1, &meshes[0].VAO)
     glBindVertexArray(meshes[0].VAO)
 

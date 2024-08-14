@@ -5,6 +5,8 @@ var vertices = [1.0,0.9,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0
 //var vertices2 = [1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0]
 var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
 
+console.log('coords',coords.length*8)
+
 var array = []
 function addF64(arr){
     var array64 = new Float64Array(arr)
@@ -23,8 +25,9 @@ function addI64(arr){
     }
 }
 
-addI64([BigInt(vertices.length*8)])
+//addI64([BigInt(vertices.length*8)])
 addF64(vertices)
+addF64(coords)
 
 
 var out = new Uint8Array(array)
