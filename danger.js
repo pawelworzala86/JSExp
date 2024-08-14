@@ -64,6 +64,11 @@ var parseSource = (source)=>{
 
     r(/var (.*) \= ([0-9\.\-]+)/gm,'.data\n$1 dq $2')
 
+
+    r(/(.*) = Math\.(.*)\((.*)\)/gm,'Macro_Math_$2 $3, $1')
+
+
+
 /*
     //              & and inline functions
     var lines = source.split('\n')

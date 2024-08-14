@@ -22,6 +22,11 @@ stp2 dq 0
     mth8 dq 0.0
 .code
 
+.data
+    PI dq 3.141592653589793238
+    deg2rad dq 0.017453292519943295
+.code
+
 
 
 .code
@@ -219,7 +224,7 @@ stp2 dq 0
 
 
 .code
-    Macro_Math_Deg2Rad macro aram11,aret33
+    Macro_Math_deg2rad macro aram11,aret33
     
 
     fld qword ptr aram11
