@@ -1,11 +1,12 @@
 import {fs} from './file.js'
 import * as matrix from './matrix.js'
+import {loadTexture} from './texture.js'
 
 //var vertices = [1.0,0.9,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0]
 //var vertices2 = [1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0]
-//var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
+var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
 
-var VAO = 0
+//var VAO = 0
 var bufferID = 0
 
 var projectionMatrix = Array(16)//[1.3737387097273113,0.0,0.0,0.0,0.0,1.3737387097273113,0.0,0.0,0.0,0.0,-1.02020202020202,-1.0,0.0,0.0,-2.0202020202020203,0.0]
@@ -20,6 +21,15 @@ var near = 0.1
 var far = 1000.0
 
 var emptyMatrix = Array(16)
+
+
+
+
+var textureID = 0
+var texName = 'texture.jpg'
+
+
+
 
 var triangles = 2
 var points = 3
@@ -94,6 +104,7 @@ var vertsBuff = NULL
 var coordsBuff = NULL
 
 function SystemInit(){
+    FreeImage_Initialise()
 
     InitGL()
 
@@ -140,19 +151,24 @@ function SystemInit(){
 
     fs.read(8)
     vertsSizeBuff = fs.buffor
+    printf('VERTEX %i',vertsSizeBuff)
 
-    fs.read(vertsSizeBuff)
+    fs.read(144)
     vertsBuff = fs.buffor
 
     fs.read(8)
     cordsSizeBuff = fs.buffor
 
-    fs.read(cordsSizeBuff)
-    coordsBuff = fs.buffor
+    fs.read(96)
+    cordsSizeBuff = fs.buffor
 
-    meshes[0].createGeometry(vertsBuff,coordsBuff)
+    meshes[0].createGeometry(vertsBuff,cordsSizeBuff)
 
     fs.close()
+
+    textureID = loadTexture(&texName)
+
+    printf('textureID %i', textureID)
 
     /*glGenVertexArrays(1, &meshes[0].VAO)
     glBindVertexArray(meshes[0].VAO)
@@ -181,6 +197,11 @@ function SystemInit(){
     matrix.identity(projectionMatrix)
     matrix.perspective(projectionMatrix,fovy,aspect,near,far)
     matrix.print('perspectiveNO',projectionMatrix)
+
+    //glActiveTexture(GL_TEXTURE0);
+    //glEnable(GL_DEPTH_TEST)
+    //glDepthFunc(GL_LEQUAL)
+    glEnable(GL_TEXTURE_2D)
 }
 
 
@@ -189,7 +210,7 @@ var uniformLocation = 0
 
 function MacroSetUniform1i(program,name,value){
     uniformLocation = glGetUniformLocation(program, name)
-        //printf("uniformLocation=%i",uniformLocation)
+    //printf("uniformLocation=%i",uniformLocation)
     glUniform1i(uniformLocation, value)
 }
 
@@ -205,6 +226,10 @@ function SystemRender(){
     MacroSetUniformMatrix(programID, 'd_projection', projectionMatrix)
     MacroSetUniformMatrix(programID, 'd_camera', cameraMatrix)
     MacroSetUniformMatrix(programID, 'd_model', modelMatrix)
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID)
+    MacroSetUniform1i(programID, 'diffuseTexture', 0)
 
     //glBindVertexArray(VAO)
     glBindVertexArray(meshes[0].VAO)

@@ -16,6 +16,7 @@
     include ..\include\extern.inc
 
     include ..\include\math.asm
+    include ..\include\string.asm
 
     include ..\build\gl46.d.inc
 

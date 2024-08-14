@@ -1380,6 +1380,8 @@ GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW = 33517
 
 .code
 InitGL proc
+invoke wglGetProcAddress, "glActiveTexture"
+mov [glActiveTexture],rax
 invoke wglGetProcAddress, "glBindBuffer"
 mov [glBindBuffer],rax
 invoke wglGetProcAddress, "glGenBuffers"

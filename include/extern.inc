@@ -27,3 +27,21 @@
     externdef memset: near
     externdef malloc: near
     externdef relloc: near
+
+
+    includelib \jsexp\include\FreeImage.lib
+    externdef FreeImage_OpenMemory: near
+    externdef FreeImage_LoadFromMemory: near
+    externdef FreeImage_GetWidth: near
+    externdef FreeImage_GetHeight: near
+    externdef FreeImage_GetBits: near
+    externdef FreeImage_ConvertTo32Bits: near
+    externdef FreeImage_GetFormatFromFIF: near
+    externdef FreeImage_LoadFromHandle: near
+    externdef FreeImage_Initialise: near
+    externdef FreeImage_Load: near
+    externdef FreeImage_GetFileType: near
+    externdef FreeImage_GetFileTypeFromMemory: near
+    externdef FreeImage_LoadFromMemory: near
+    externdef FreeImage_DeInit: near
+    externdef FreeImage_Unload: near

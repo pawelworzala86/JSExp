@@ -5,6 +5,7 @@
     include ..\include\extern.inc
 
     include ..\include\math.asm
+    include ..\include\string.asm
 
     .code
 

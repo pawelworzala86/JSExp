@@ -1,4 +1,5 @@
 .data?
+glActiveTexture dq ?
 glBindBuffer dq ?
 glGenBuffers dq ?
 glBufferData dq ?

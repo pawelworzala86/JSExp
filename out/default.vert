@@ -17,6 +17,6 @@ void main(){
 
     gl_Position = projection*camera*model*vec4(position,1.0);
 
-    vCoord = coord;
+    vCoord = coord;//position.xy;
 
 }
