@@ -43,6 +43,17 @@ function getFI(file){
     return FILES[file]
 }
 
+function Prepare(source){
+    function r(reg,func){
+        source = source.replace(reg,func)
+    }
+
+    r(/\)\ \{/gm,'){')
+    r(/[\ ]*\=[\ ]*/gm,' = ')
+
+    return source
+}
+
 function Parse(file){
 
     const prefix = 'P'+getFI(file)
@@ -56,7 +67,7 @@ function Parse(file){
 
 
     
-    r(/\)\ \{/gm,'){')
+    source = Prepare(source)
 
 
 
