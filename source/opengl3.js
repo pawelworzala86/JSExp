@@ -28,8 +28,8 @@ class Mesh{
         this.VAO = 0
     }
     createGeometry(){
-        glGenVertexArrays(1, &meshes[0].VAO)
-        glBindVertexArray(meshes[0].VAO)
+        glGenVertexArrays(1, &this.VAO)
+        glBindVertexArray(this.VAO)
 
         CreateBuffer(0,3,3*8,18*8,vertices)
         CreateBuffer(1,2,2*8,12*8,coords)
