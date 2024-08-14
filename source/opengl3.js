@@ -27,6 +27,17 @@ class Mesh{
     constructor(){
         this.VAO = 0
     }
+    createGeometry(){
+        glGenVertexArrays(1, &meshes[0].VAO)
+        glBindVertexArray(meshes[0].VAO)
+
+        CreateBuffer(0,3,3*8,18*8,vertices)
+        CreateBuffer(1,2,2*8,12*8,coords)
+
+        printf('after')
+
+        glBindVertexArray(0)
+    }
 }
 
 var meshes = new Mesh(32)
@@ -108,7 +119,8 @@ function SystemInit(){
 
     meshes[0].constructor()
 
-    glGenVertexArrays(1, &meshes[0].VAO)
+    meshes[0].createGeometry()
+    /*glGenVertexArrays(1, &meshes[0].VAO)
     glBindVertexArray(meshes[0].VAO)
 
     CreateBuffer(0,3,3*8,18*8,vertices)
@@ -116,7 +128,7 @@ function SystemInit(){
 
     printf('after')
 
-    glBindVertexArray(0)
+    glBindVertexArray(0)*/
 
 
     //matrix.create(emptyMatrix)
