@@ -88,6 +88,7 @@ var programID = 0
 
 
 var vertsSizeBuff = NULL
+var cordsSizeBuff = NULL
 
 var vertsBuff = NULL
 var coordsBuff = NULL
@@ -143,7 +144,10 @@ function SystemInit(){
     fs.Read(vertsSizeBuff)
     vertsBuff = fs.buffor
 
-    fs.Read(96)
+    fs.Read(8)
+    cordsSizeBuff = fs.buffor
+
+    fs.Read(cordsSizeBuff)
     coordsBuff = fs.buffor
 
     meshes[0].createGeometry(vertsBuff,coordsBuff)

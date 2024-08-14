@@ -27,6 +27,7 @@ function addI64(arr){
 
 addI64([BigInt(vertices.length*8)])
 addF64(vertices)
+addI64([BigInt(coords.length*8)])
 addF64(coords)
 
 
