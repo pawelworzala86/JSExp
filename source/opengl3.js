@@ -165,17 +165,19 @@ function SystemInit(){
     glBindVertexArray(0)*/
 
 
-    //matrix.create(emptyMatrix)
+    /*matrix.create(emptyMatrix)
+    matrix.create(modelMatrix)
+    matrix.create(cameraMatrix)
+    matrix.create(projectionMatrix)*/
+
     matrix.identity(emptyMatrix)
 
-    //matrix.create(modelMatrix)
     matrix.identity(modelMatrix)
     matrix.print('modelMatrix',modelMatrix)
 
     matrix.translate(cameraMatrix,emptyMatrix,cameraVector)
     matrix.print('cameraMatrix',cameraMatrix)
 
-    ///matrix.create(modelMatrix)
     matrix.identity(projectionMatrix)
     matrix.perspective(projectionMatrix,fovy,aspect,near,far)
     matrix.print('perspectiveNO',projectionMatrix)
@@ -186,15 +188,15 @@ function SystemInit(){
 var uniformLocation = 0
 
 function MacroSetUniform1i(program,name,value){
-    uniformLocation = gl.GetUniformLocation(program, name)
+    uniformLocation = glGetUniformLocation(program, name)
         //printf("uniformLocation=%i",uniformLocation)
-    gl.Uniform1i(uniformLocation, value)
+    glUniform1i(uniformLocation, value)
 }
 
 function MacroSetUniformMatrix(program,name,value){
-    uniformLocation = gl.GetUniformLocation(program, name)
+    uniformLocation = glGetUniformLocation(program, name)
     //if(uniformLocation > -1){
-        gl.UniformMatrix4dv(uniformLocation, 1, 0, &value)
+        glUniformMatrix4dv(uniformLocation, 1, 0, &value)
     //}
 }
 
