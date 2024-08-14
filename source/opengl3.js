@@ -87,6 +87,7 @@ var programID = 0
 
 
 
+var vertsSizeBuff = NULL
 
 var vertsBuff = NULL
 var coordsBuff = NULL
@@ -135,7 +136,11 @@ function SystemInit(){
     meshes[0].constructor()
 
     fs.Open('model.bin')
-    fs.Read(144)
+
+    fs.Read(8)
+    vertsSizeBuff = fs.buffor
+
+    fs.Read(vertsSizeBuff)
     vertsBuff = fs.buffor
 
     fs.Read(96)
