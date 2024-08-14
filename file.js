@@ -15,7 +15,7 @@ function addF64(arr){
     }
 }
 function addI64(arr){
-    var array64 = new BigInt64Array(arr.map(i=>BigInt(i)))
+    var array64 = new BigInt64Array(arr)
     var array8 = new Uint8Array(array64.buffer)
     //array8.map(f=>{array.push(f)})
     for(let i=0;i<array8.length;i++){
@@ -23,7 +23,7 @@ function addI64(arr){
     }
 }
 
-addI64([vertices.length*8])
+addI64([BigInt(vertices.length*8)])
 addF64(vertices)
 
 
