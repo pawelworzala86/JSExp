@@ -50,6 +50,7 @@ function Prepare(source){
 
     r(/\)[\ ]*\{/gm,'){')
     r(/[\ ]*\=[\ ]*/gm,' = ')
+    r(/\}[\ ]*\{/gm,'}else{')
 
     return source
 }
