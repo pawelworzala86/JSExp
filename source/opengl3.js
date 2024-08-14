@@ -21,9 +21,12 @@ var far = 1000.0
 
 var emptyMatrix = Array(16)
 
-
+var triangles = 2
+var points = 3
 var vertNums = 3
 var coordNums = 2
+var vertSingleSize = 3*8
+var coordSingleSize = 2*8
 var bytes = 8
 var vertLenght = 18
 var coordLength = 12
@@ -39,9 +42,10 @@ class Mesh{
         glBindVertexArray(this.VAO)
 
         vertSize = vertLenght * bytes
+        coordSize = coordLength * bytes
 
-        CreateBuffer(0,3,3*8,vertSize,vertices)
-        CreateBuffer(1,2,2*8,12*8,coords)
+        CreateBuffer(0,vertNums,vertSingleSize,vertSize,vertices)
+        CreateBuffer(1,coordNums,coordSingleSize,coordSize,coords)
 
         printf('after')
 
