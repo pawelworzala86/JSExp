@@ -48,7 +48,7 @@ function Prepare(source){
         source = source.replace(reg,func)
     }
 
-    r(/\)\ \{/gm,'){')
+    r(/\)[\ ]*\{/gm,'){')
     r(/[\ ]*\=[\ ]*/gm,' = ')
 
     return source
