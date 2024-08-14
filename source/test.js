@@ -2,6 +2,8 @@ import * as TST2 from './test2.js'
 
 var test = 12.22
 
+var testA=12.22
+
 function print(){
     TST2.TestFunc()
     var kuk = 23
