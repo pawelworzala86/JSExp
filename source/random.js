@@ -6,6 +6,8 @@ var zero = 0.0
 
 var mixed = 342.886
 
+//var timeBuffer = [0,0]
+
 function random(){
     num = Math.deg2rad(init)
     sin = Math.sin(num)
@@ -17,6 +19,8 @@ function random(){
 }
 
 function main(){
+    //GetSystemTime(&timeBuffer)
+    //printf('ok %f %s', timeBuffer[0], lf)
     random()
     random()
     random()
