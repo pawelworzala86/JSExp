@@ -14,11 +14,11 @@ class FileSystem{
         //mov handle, rax
         this.fsize = GetFileSize(this.handle, 0)
         //mov fsize, rax
-        printf('fsize %i',this.fsize)
+        //printf('fsize %i',this.fsize)
         this.buffor = malloc(this.fsize)
         //mov buffor, rax
         ReadFile(this.handle, this.buffor, this.fsize, 0, 0)
-        printf('%s',this.buffor)
+        //printf('%s',this.buffor)
         CloseHandle(this.handle)
     }
 }
