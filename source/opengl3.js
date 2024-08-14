@@ -98,7 +98,7 @@ function SystemInit(){
     InitGL()
 
     //fs.ReadFileSync('default.frag')
-    fs.ReadFileSync('default.vert')
+    fs.readFileSync('default.vert')
 
 	//printf('shader %s', buffor)
 
@@ -108,7 +108,7 @@ function SystemInit(){
 
     printf('OK')
 
-    fs.ReadFileSync('default.frag')
+    fs.readFileSync('default.frag')
 
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader,1, &fs.buffor, &fs.fsize);
@@ -136,23 +136,23 @@ function SystemInit(){
 
     meshes[0].constructor()
 
-    fs.Open('model.bin')
+    fs.open('model.bin')
 
-    fs.Read(8)
+    fs.read(8)
     vertsSizeBuff = fs.buffor
 
-    fs.Read(vertsSizeBuff)
+    fs.read(vertsSizeBuff)
     vertsBuff = fs.buffor
 
-    fs.Read(8)
+    fs.read(8)
     cordsSizeBuff = fs.buffor
 
-    fs.Read(cordsSizeBuff)
+    fs.read(cordsSizeBuff)
     coordsBuff = fs.buffor
 
     meshes[0].createGeometry(vertsBuff,coordsBuff)
 
-    fs.Close()
+    fs.close()
 
     /*glGenVertexArrays(1, &meshes[0].VAO)
     glBindVertexArray(meshes[0].VAO)
