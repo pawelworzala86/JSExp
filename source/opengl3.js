@@ -236,5 +236,5 @@ function SystemRender(){
 	glDrawArrays(GL_TRIANGLES, 0, 6)
 }
 function SystemDestroy(){
-    
+    //FreeImage_Unload()
 }
