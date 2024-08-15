@@ -3,6 +3,7 @@ fs = require('fs')
 
 var vertices = [1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0,1.0,1.0,0.0,-1.0,-1.0,0.0,-1.0,1.0,0.0]
 var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
+var texture = 'texture.jpg'
 
 console.log('coords',coords.length*8)
 
@@ -23,12 +24,19 @@ function addI64(arr){
         array.push(array8[i])
     }
 }
+function addString(arr){
+    for(let i=0;i<arr.length;i++){
+        array.push(arr.charCodeAt(i))
+    }
+}
 
 addI64([BigInt(vertices.length/3/3)])//triangles
-//addI64([BigInt(vertices.length*8)])
+
 addF64A(vertices)
-//addI64([BigInt(coords.length*8)])
 addF64A(coords)
+
+addI64([BigInt(texture.length)])
+addString(texture)
 
 
 var out = new Uint8Array(array)
