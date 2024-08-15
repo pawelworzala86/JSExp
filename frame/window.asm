@@ -170,19 +170,19 @@ entry_point proc
 
 entry_point endp
 
-    .data?
-        arr dq ?
-        hThread dq ?
-    .code
+    ;.data?
+    ;    arr dq ?
+    ;    hThread dq ?
+    ;.code
 
-TestThread PROC
+;TestThread PROC
     ;invoke printf,"THREDED %s",lf
-    rcall P1_SystemRender
-    invoke	SwapBuffers,hDC
-    fn SleepEx,16,0
-    rcall TestThread
-    ret
-TestThread ENDP
+    ;rcall P1_SystemRender
+    ;invoke	SwapBuffers,hDC
+    ;fn SleepEx,16,0
+    ;rcall TestThread
+    ;ret
+;TestThread ENDP
 
 main proc
 
@@ -319,7 +319,7 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
 
                 ;invoke SetForegroundWindow, hWin
 
-            mov hThread, rv(CreateThread,0,0, addr TestThread,addr arr,0,0)
+            ;mov hThread, rv(CreateThread,0,0, addr TestThread,addr arr,0,0)
 
 
             .return 0
@@ -363,7 +363,6 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
 
         .case WM_PAINT
 
-
             ;invoke GetCursorPos, dword ptr MyPoint
             ;mov rax, qword ptr MyPoint
             ;invoke printf, "MyPoint.x... %i %s", rax, lf
@@ -383,6 +382,7 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
             ;invoke  EndPaint,hWin
 
             ;rcall SendMessage,hWin,WM_PAINT,0,0
+            .return 0
 
         .case WM_MOUSEMOVE
 
