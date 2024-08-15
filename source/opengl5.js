@@ -109,8 +109,7 @@ function SystemInit(){
     matrix.print('cameraMatrix',cameraMatrix)
 
 
-    //aspect = screen.iwidth / screen.iheight
-    //Macro_Math_podziel screen.iwidth, screen.iheight, aspect
+    //aspect = screen.fwidth / screen.fheight
 
     matrix.identity(projectionMatrix)
     matrix.perspective(projectionMatrix,fovy,aspect,near,far)

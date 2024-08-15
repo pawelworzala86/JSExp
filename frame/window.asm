@@ -344,6 +344,8 @@ WndProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
             mov	w,r8d
             shr	r9d,16
             mov	h,r9d
+            ;cvtsi2sd rax,w
+            ;cvtsi2sd rbx,h
             invoke	glViewport,0,0;,640,640
             ;invoke	glMatrixMode,GL_PROJECTION
             ;invoke	glLoadIdentity
