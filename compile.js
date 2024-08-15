@@ -31,6 +31,7 @@ var SOURCES = {}
 var EXPORTS = {}
 
 var GLFuncs = []
+var TEXTS = {}
 
 function getFI(file){
     if(FILES[file]){

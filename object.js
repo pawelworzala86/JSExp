@@ -102,6 +102,11 @@ function Parse(source){
     source = source.replace(/var (.*) = new (.*)\(\)/gm,match=>{
         var prop = match.split('=')[0].replace('var','').trim()
         var className = match.split('new')[1].replace('()','').trim()
+        console.log('className',className)
+        console.log('CLASSES',CLASSES)
+        if(className.indexOf('_')>-1){
+            className = className.split('_')[1]
+        }
         CLASSES[className].locals.push(prop)
         return '.data?\n'+prop+' label '+className
     })
