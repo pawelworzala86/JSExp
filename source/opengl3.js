@@ -160,9 +160,9 @@ function SystemInit(){
     cordsSizeBuff = fs.buffor
 
     fs.read(96)
-    cordsSizeBuff = fs.buffor
+    coordsBuff = fs.buffor
 
-    meshes[0].createGeometry(vertsBuff,cordsSizeBuff)
+    meshes[0].createGeometry(vertsBuff,coordsBuff)
 
     fs.close()
 
