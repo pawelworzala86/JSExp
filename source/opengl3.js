@@ -97,8 +97,8 @@ var programID = 0
 
 
 
-var vertsSizeBuff = NULL
-var cordsSizeBuff = NULL
+var vertsSizeBuff = 0
+var cordsSizeBuff = 0
 
 var vertsBuff = NULL
 var coordsBuff = NULL
