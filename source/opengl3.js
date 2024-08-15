@@ -165,14 +165,14 @@ function SystemInit(){
     vertsSizeBuff = fs.readInt()
     printf('VERTEX %i',vertsSizeBuff)
 
-    fs.read(vertsSizeBuff)
-    vertsBuff = fs.buffor
+    vertsBuff = fs.read(vertsSizeBuff)
+    //vertsBuff = fs.buffor
     //printf('VERTEX %f',vertsBuff[0])
 
     cordsSizeBuff = fs.readInt()
 
-    fs.read(cordsSizeBuff)
-    coordsBuff = fs.buffor
+    coordsBuff = fs.read(cordsSizeBuff)
+    //coordsBuff = fs.buffor
 
     meshes[0].createGeometry(vertsBuff,coordsBuff)
 

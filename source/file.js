@@ -25,6 +25,7 @@ class FileSystem{
     read(ssize){
         this.buffor = malloc(ssize)
         ReadFile(this.handle, this.buffor, ssize, 0, 0)
+        return this.buffor
     }
     readInt(){
         //this.bufforInt = malloc(8)
