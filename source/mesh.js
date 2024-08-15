@@ -1,4 +1,4 @@
-var triangles = 2
+//var triangles = 2
 var points = 3
 var vertNums = 3
 var coordNums = 2
@@ -9,17 +9,29 @@ var vertLenght = 18
 var coordLength = 12
 var vertSize = 0
 var coordSize = 0
+var numsInVert = 3
+var numsInCoord = 2
+var coords = 2
+var verts = 3
 
 export class Mesh{
     constructor(){
         this.VAO = 0
     }
-    createGeometry(verts,coordsBu){
+    createGeometry(triangles,verts,coordsBu){
         glGenVertexArrays(1, &this.VAO)
         glBindVertexArray(this.VAO)
 
+        vertLenght = numsInVert * vertNums * triangles
+        coordLength = numsInCoord * vertNums * triangles
+
+        printf('coordLength %i',coordLength)
+
         vertSize = vertLenght * bytes
         coordSize = coordLength * bytes
+
+        vertSingleSize = vertNums * bytes
+        coordSingleSize = coordNums * bytes
 
         CreateBuffer(0,vertNums,vertSingleSize,vertSize,verts)
         CreateBuffer(1,coordNums,coordSingleSize,coordSize,coordsBu)

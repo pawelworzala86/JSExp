@@ -88,7 +88,7 @@ function SystemInit(){
     //cordsSizeBuff = fs.readInt()
     coordsBuff = fs.read(cordsSizeBuff)
 
-    meshes[0].createGeometry(vertsBuff,coordsBuff)
+    meshes[0].createGeometry(triangles,vertsBuff,coordsBuff)
 
     fs.close()
 
