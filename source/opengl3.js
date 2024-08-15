@@ -149,8 +149,8 @@ function SystemInit(){
 
     fs.open('model.bin')
 
-    fs.read(8)
-    vertsSizeBuff = fs.buffor
+    vertsSizeBuff = fs.readInt()
+    //vertsSizeBuff = fs.buffor
     printf('VERTEX %i',vertsSizeBuff)
 
     fs.read(144)

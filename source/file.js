@@ -8,6 +8,7 @@ class FileSystem{
         this.handle = 0
         this.fsize = 0
         this.buffor = 0
+        this.bufforInt = 0
     }
     readFileSync(fileName){
         this.handle = CreateFileA(fileName, GENERIC_READ,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL, 0)
@@ -24,6 +25,11 @@ class FileSystem{
     read(ssize){
         this.buffor = malloc(ssize)
         ReadFile(this.handle, this.buffor, ssize, 0, 0)
+    }
+    readInt(){
+        this.bufforInt = malloc(8)
+        ReadFile(this.handle, addr this.bufforInt, ssize, 0, 0)
+        return this.bufforInt
     }
     close(){
         CloseHandle(this.handle)
