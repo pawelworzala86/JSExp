@@ -38,6 +38,7 @@ addF64A(coords)
 addI64([BigInt(texture.length)])
 addString(texture)
 
+console.log('BigInt(texture.length)',BigInt(texture.length))
 
 var out = new Uint8Array(array)
 

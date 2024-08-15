@@ -57,6 +57,9 @@ var bytes = 8
 var vertsBuff = NULL
 var coordsBuff = NULL
 
+var textureLengthName = 0
+var textureName = 0
+
 function SystemInit(){
     FreeImage_Initialise()
 
@@ -87,6 +90,11 @@ function SystemInit(){
 
     //cordsSizeBuff = fs.readInt()
     coordsBuff = fs.read(cordsSizeBuff)
+
+    textureLengthName = fs.readInt()
+    printf('textureLengt %i', textureLengthName)
+    //textureName = fs.readString(textureLengthName)
+    //textureID = loadTexture(&textureName)
 
     meshes[0].createGeometry(triangles,vertsBuff,coordsBuff)
 

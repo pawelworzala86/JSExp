@@ -72,7 +72,9 @@ function Parse(file){
 
     //source = Obj(source)
 
-
+   // for(let CL of CLN){
+    //    r(new RegExp(CL,'gm'),'')
+    //}
     
     source = Prepare(source)
 
@@ -153,12 +155,15 @@ function Parse(file){
     //                      imports
 
     var IMP = {}
+    //var CLEAN = []
     r(/import\ (.*)/gm, match=>{
         var fileImp = match.split('\'')[1].split('\'')[0].trim()
         fileImp = fileImp.replace('./','')
         console.log('file',fileImp)
 
         Parse(fileImp)
+
+        //CLEAN.push('include '+fileImp.replace('.js','.asm')+'')
 
         match=match.replace(/[0-9]+\:/gm,'')
         console.log('IMPORT', match)
@@ -193,12 +198,6 @@ function Parse(file){
         console.log('IMPORTS',IMPORTS)
 
         IMP[getFI(fileImp)] = IMPORTS
-        
-        //IMPORTS.map(name=>{
-        //    match=match.replace(new RegExp('(\\b)'+name+'(\\b|\\(|\\ )','gm'),'$1P'+FILE_INDEX+'_'+name+'$2')
-        //})
-
-        //Parse(fileImp)
 
         return 'include '+fileImp.replace('.js','.asm')+'\n'
     })
@@ -265,6 +264,8 @@ function Parse(file){
         return match
     })
     console.log('GLF',GLFuncs)
+
+
 
     SOURCES[getFI(file)] = source
 

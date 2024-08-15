@@ -35,17 +35,17 @@ StringCompare macro textA, textB
 
 endm
 
-.data?
-    StringMergeResult db 1024 dup(0)
-.code
-StringMerge macro textA, textB
-    lea rdi, StringMergeResult
-    lea rsi, textA
-    invoke strcat, rdi, rsi
-
-    lea rdi, StringMergeResult
-    lea rsi, textB
-    invoke strcat, rdi, rsi
-
-    lea rax, StringMergeResult
-endm
+;.data?
+;    StringMergeResult db 1024 dup(0)
+;.code
+;StringMerge macro textA, textB
+;    lea rdi, StringMergeResult
+;    lea rsi, textA
+;    invoke strcat, rdi, rsi
+;
+;    lea rdi, StringMergeResult
+;    lea rsi, textB
+;    invoke strcat, rdi, rsi
+;
+;    lea rax, StringMergeResult
+;endm
