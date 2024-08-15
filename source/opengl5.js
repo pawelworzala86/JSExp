@@ -48,6 +48,11 @@ var meshes = new Mesh(32)
 
 var vertsSizeBuff = 0
 var cordsSizeBuff = 0
+var triangles = 0
+var vertInTrianglesTri = 3
+var vertInTrianglesDuo = 2
+var numsInVert = 3
+var bytes = 8
 
 var vertsBuff = NULL
 var coordsBuff = NULL
@@ -68,10 +73,19 @@ function SystemInit(){
 
     fs.open('model.bin')
 
-    vertsSizeBuff = fs.readInt()
+    triangles = fs.readInt()
+    printf('triangles %i',triangles)
+
+    vertsSizeBuff = triangles * vertInTrianglesTri * numsInVert * bytes
+    //printf('vertsSizeBuff %i',vertsSizeBuff)
+
+    //vertsSizeBuff = fs.readInt()
     vertsBuff = fs.read(vertsSizeBuff)
 
-    cordsSizeBuff = fs.readInt()
+    cordsSizeBuff = triangles * vertInTrianglesTri * numsInVert * bytes
+    //printf('cordsSizeBuff %i',cordsSizeBuff)
+
+    //cordsSizeBuff = fs.readInt()
     coordsBuff = fs.read(cordsSizeBuff)
 
     meshes[0].createGeometry(vertsBuff,coordsBuff)

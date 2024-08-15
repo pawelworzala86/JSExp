@@ -7,7 +7,7 @@ var coords = [1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0]
 console.log('coords',coords.length*8)
 
 var array = []
-function addF64(arr){
+function addF64A(arr){
     var array64 = new Float64Array(arr)
     var array8 = new Uint8Array(array64.buffer)
     //array8.map(f=>{array.push(f)})
@@ -24,10 +24,11 @@ function addI64(arr){
     }
 }
 
-addI64([BigInt(vertices.length*8)])
-addF64(vertices)
-addI64([BigInt(coords.length*8)])
-addF64(coords)
+addI64([BigInt(vertices.length/3/3)])//triangles
+//addI64([BigInt(vertices.length*8)])
+addF64A(vertices)
+//addI64([BigInt(coords.length*8)])
+addF64A(coords)
 
 
 var out = new Uint8Array(array)
