@@ -22,6 +22,7 @@
     externdef atol: near
     externdef atoi: near
     externdef ftoa: near
+    externdef ftol: near
     externdef strtok: near
     externdef fgets: near
     externdef memset: near
