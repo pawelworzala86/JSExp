@@ -27,8 +27,8 @@ class FileSystem{
         ReadFile(this.handle, this.buffor, ssize, 0, 0)
     }
     readInt(){
-        this.bufforInt = malloc(8)
-        ReadFile(this.handle, addr this.bufforInt, ssize, 0, 0)
+        //this.bufforInt = malloc(8)
+        ReadFile(this.handle, addr this.bufforInt, 8, 0, 0)
         return this.bufforInt
     }
     close(){

@@ -150,16 +150,15 @@ function SystemInit(){
     fs.open('model.bin')
 
     vertsSizeBuff = fs.readInt()
-    //vertsSizeBuff = fs.buffor
     printf('VERTEX %i',vertsSizeBuff)
 
-    fs.read(144)
+    fs.read(vertsSizeBuff)
     vertsBuff = fs.buffor
+    printf('VERTEX %f',vertsBuff[0])
 
-    fs.read(8)
-    cordsSizeBuff = fs.buffor
+    cordsSizeBuff = fs.readInt()
 
-    fs.read(96)
+    fs.read(cordsSizeBuff)
     coordsBuff = fs.buffor
 
     meshes[0].createGeometry(vertsBuff,coordsBuff)
