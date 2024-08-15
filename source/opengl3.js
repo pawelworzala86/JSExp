@@ -154,7 +154,7 @@ function SystemInit(){
 
     fs.read(vertsSizeBuff)
     vertsBuff = fs.buffor
-    printf('VERTEX %f',vertsBuff[0])
+    //printf('VERTEX %f',vertsBuff[0])
 
     cordsSizeBuff = fs.readInt()
 
