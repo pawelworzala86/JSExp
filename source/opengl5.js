@@ -112,10 +112,10 @@ function SystemInit(){
     matrix.perspective(projectionMatrix,fovy,aspect,near,far)
     matrix.print('perspectiveNO',projectionMatrix)
 
-    //glActiveTexture(GL_TEXTURE0);
+ 
     //glEnable(GL_DEPTH_TEST)
     //glDepthFunc(GL_LEQUAL)
-    glEnable(GL_TEXTURE_2D)
+    //glEnable(GL_TEXTURE_2D)
 }
 
 
