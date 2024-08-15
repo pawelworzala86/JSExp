@@ -91,9 +91,9 @@ function SystemInit(){
     //cordsSizeBuff = fs.readInt()
     coordsBuff = fs.read(cordsSizeBuff)
 
-    textureLengthName = fs.readInt()
-    printf('textureLengt %i', textureLengthName)
-    //textureName = fs.readString(textureLengthName)
+    //textureLengthName = fs.readInt()
+    //printf('textureLengt %i', textureLengthName)
+    //fs.readString(12)
     //textureID = loadTexture(&textureName)
 
     meshes[0].createGeometry(triangles,vertsBuff,coordsBuff)

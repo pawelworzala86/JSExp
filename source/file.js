@@ -1,7 +1,10 @@
+IFNDEF _FILE_INC_
+_FILE_INC_ EQU 1
 
 //var handle = 0
 //var fsize = 0
-//var buffS = 0
+.data?
+    buffStr db 1024 dup (0)
 
 class FileSystem{
     constructor(){
@@ -34,10 +37,10 @@ class FileSystem{
         return this.bufforInt
     }
     readString(ssize){
-        this.buffor = malloc(ssize)
-        ReadFile(this.handle, this.buffor, ssize, 0, 0)
-        printf('READSTR %s', this.buffor)
-        return this.buffor
+        malloc(ssize)
+        ReadFile(this.handle, qword ptr buffStr, ssize, 0, 0)
+        printf('READSTR %s', qword ptr buffStr)
+        //return this.buffor
     }
     close(){
         CloseHandle(this.handle)
@@ -54,3 +57,5 @@ function main(){
     fs.readFileSync('default.frag')
     fs.readFileSync('default.vert')
 }
+
+ENDIF
