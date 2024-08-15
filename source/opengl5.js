@@ -108,6 +108,10 @@ function SystemInit(){
     matrix.translate(cameraMatrix,emptyMatrix,cameraVector)
     matrix.print('cameraMatrix',cameraMatrix)
 
+
+    //aspect = screen.iwidth / screen.iheight
+    //Macro_Math_podziel screen.iwidth, screen.iheight, aspect
+
     matrix.identity(projectionMatrix)
     matrix.perspective(projectionMatrix,fovy,aspect,near,far)
     matrix.print('perspectiveNO',projectionMatrix)
@@ -116,6 +120,8 @@ function SystemInit(){
     //glEnable(GL_DEPTH_TEST)
     //glDepthFunc(GL_LEQUAL)
     //glEnable(GL_TEXTURE_2D)
+
+    //gl.Viewport(0, 0, screen.iwidth, screen.iheight);
 }
 
 
@@ -123,6 +129,10 @@ function SystemInit(){
 
 
 function SystemRender(){
+    //Macro_Math_podziel screen.iwidth, screen.iheight, aspect
+    
+    glClear(GL_COLOR_BUFFER_BIT);
+
     meshes[0].render(defaultShader,projectionMatrix,cameraMatrix,modelMatrix,textureID)
 }
 function SystemDestroy(){
