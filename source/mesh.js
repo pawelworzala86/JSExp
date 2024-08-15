@@ -17,10 +17,15 @@ var verts = 3
 export class Mesh{
     constructor(){
         this.VAO = 0
+        this.triangles = 0
+        this.indices = 0
     }
     createGeometry(triangles,verts,coordsBu){
         glGenVertexArrays(1, &this.VAO)
         glBindVertexArray(this.VAO)
+
+        this.triangles = triangles
+        this.indices = points * triangles
 
         vertLenght = numsInVert * vertNums * triangles
         coordLength = numsInCoord * vertNums * triangles
@@ -53,7 +58,7 @@ export class Mesh{
     
         //glBindVertexArray(VAO)
         glBindVertexArray(this.VAO)
-        glDrawArrays(GL_TRIANGLES, 0, 6)
+        glDrawArrays(GL_TRIANGLES, 0, this.indices)
     }
 }
 
