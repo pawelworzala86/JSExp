@@ -61,6 +61,19 @@ class Mesh{
 
         glBindVertexArray(0)
     }
+    render(){
+        MacroSetUniformMatrix(programID, 'd_projection', projectionMatrix)
+        MacroSetUniformMatrix(programID, 'd_camera', cameraMatrix)
+        MacroSetUniformMatrix(programID, 'd_model', modelMatrix)
+    
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureID)
+        MacroSetUniform1i(programID, 'diffuseTexture', 0)
+    
+        //glBindVertexArray(VAO)
+        glBindVertexArray(this.VAO)
+        glDrawArrays(GL_TRIANGLES, 0, 6)
+    }
 }
 
 var meshes = new Mesh(32)
@@ -222,7 +235,7 @@ function MacroSetUniformMatrix(program,name,value){
 
 
 function SystemRender(){
-    MacroSetUniformMatrix(programID, 'd_projection', projectionMatrix)
+    /*MacroSetUniformMatrix(programID, 'd_projection', projectionMatrix)
     MacroSetUniformMatrix(programID, 'd_camera', cameraMatrix)
     MacroSetUniformMatrix(programID, 'd_model', modelMatrix)
 
@@ -232,7 +245,9 @@ function SystemRender(){
 
     //glBindVertexArray(VAO)
     glBindVertexArray(meshes[0].VAO)
-	glDrawArrays(GL_TRIANGLES, 0, 6)
+	glDrawArrays(GL_TRIANGLES, 0, 6)*/
+
+    meshes[0].render()
 }
 function SystemDestroy(){
     //FreeImage_Unload()
