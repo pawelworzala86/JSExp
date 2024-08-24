@@ -557,6 +557,8 @@ mov rax,[rbx+rcx]
     r(/rownasie/gm,'=')
 
     r(/self\.qword\ ptr\ ([a-zA-Z0-9\_]+)/gm,'qword ptr self.$1')
+
+    r(/self.        qword ptr self/gm,'self')
     
     
     

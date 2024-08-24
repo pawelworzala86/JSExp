@@ -55,10 +55,12 @@ function Parse(source){
                 mm=mm.replace(/(.*) = new (.*)\(\)/gm,
                     '$2_constructor($1)')
             mm=mm.replace(/(.*) = new (.*)\(([0-9]+)\)/gm,
-                    /*`for(indexFor = 0;indexFor<15;indexFor++){
-        $2_constructor($1\\\\[indexFor])
-    }
-`)*/'')
+                    ``/*`for(indexFor = 0;indexFor<2;indexFor++):1{
+            printf("%s", "OK")
+            mov rax, indexFor
+$2_constructor(this.$1[rax])
+        :1}
+`*/)
             }
             funcs.push(name)
             console.log(params)
