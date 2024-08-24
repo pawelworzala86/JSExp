@@ -7,12 +7,17 @@ class innOBJ{
     }
 }
 
+var indexFor = 0
+
 class OBJTest{
     constructor(){
         this.varA = 2332
         this.objA = new innOBJ(2)
     }
     create(){
+        for(indexFor = 0;indexFor<15;indexFor++){
+            printf("%s", "OK")
+        }
         innOBJ_constructor\\\\ this.objA[0]
         innOBJ_constructor\\\\ this.objA[1]
     }
