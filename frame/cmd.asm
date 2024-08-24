@@ -25,5 +25,7 @@ entry_point proc
 
 entry_point endp
 
+.data
+    indexFor dq 0
 
     end

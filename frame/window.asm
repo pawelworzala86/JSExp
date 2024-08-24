@@ -407,5 +407,6 @@ WndProc endp
     constd07 dd 0.7
     consta09 dd 0.9
     consta10 dd 1.0
+    indexFor dq 0
 
 end

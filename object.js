@@ -54,6 +54,11 @@ function Parse(source){
                 //body = 'mov '+CLASSName+', alloc('+params.length*8+')\n'+body
                 mm=mm.replace(/(.*) = new (.*)\(\)/gm,
                     '$2_constructor($1)')
+            mm=mm.replace(/(.*) = new (.*)\(([0-9]+)\)/gm,
+                    /*`for(indexFor = 0;indexFor<15;indexFor++){
+        $2_constructor($1\\\\[indexFor])
+    }
+`)*/'')
             }
             funcs.push(name)
             console.log(params)
@@ -76,7 +81,12 @@ function Parse(source){
         for(let param of params){
             if(param.value.indexOf('new')>-1){
                 const obj = param.value.split('new')[1].split('(')[0].trim()
-                struct += param.name+' '+obj+' <>\n'
+                var count = param.value.split('new')[1].split('(')[1].split(')')[0].trim()
+                if(count.length>0){
+                    struct += param.name+' '+obj+' '+count+' dup\\\\(<>)\n'
+                }else{
+                    struct += param.name+' '+obj+' <>\n'
+                }
                 CLASSES[CLASSName].objs.push({name:param.name,obj})
             }else{
                 struct += param.name+' QWORD ?\n'
@@ -90,6 +100,9 @@ function Parse(source){
             match=match.replace(
                 new RegExp('self\\.'+obj.name+'\\.(.*)\\((.*)','gm'),
                 obj.obj+'_$1(self.'+obj.name+',$2')
+            match=match.replace(
+                new RegExp('self\\.'+obj.name+'\\[(.*)\\]\\.(.*)\\((.*)\\)','gm'),
+                obj.obj+'_$2(self.'+obj.name+'[$1],$3)')
         }
 
         return '\n\n'+struct+'\n\n'+match

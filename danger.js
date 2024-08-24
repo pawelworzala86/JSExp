@@ -542,7 +542,7 @@ mov rax,[rbx+rcx]
         return `${name}[${index}]`
     })
 
-    r(/(.*)\b([a-zA-Z0-9\_]+)\[([a-zA-Z0-9\_]+)\]/gm,'mov rbx, $3\n$1[$2+rbx]')
+    //r(/(.*)\b([a-zA-Z0-9\_]+)\[([a-zA-Z0-9\_]+)\]/gm,'mov rbx, $3\n$1[$2+rbx]')
     
     //qword ptr self +qword ptr 1 + 0
 
@@ -555,6 +555,9 @@ mov rax,[rbx+rcx]
     r(/\\\\/gm,'')
 
     r(/rownasie/gm,'=')
+
+    r(/self\.qword\ ptr\ ([a-zA-Z0-9\_]+)/gm,'qword ptr self.$1')
+    
     
     
     return source
