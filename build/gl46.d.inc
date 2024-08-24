@@ -1,8 +1,5 @@
 .data?
 glActiveTexture dq ?
-glBindBuffer dq ?
-glGenBuffers dq ?
-glBufferData dq ?
 glAttachShader dq ?
 glCompileShader dq ?
 glCreateProgram dq ?
@@ -17,5 +14,4 @@ glUseProgram dq ?
 glUniform1i dq ?
 glVertexAttribPointer dq ?
 glBindVertexArray dq ?
-glGenVertexArrays dq ?
 glUniformMatrix4dv dq ?
