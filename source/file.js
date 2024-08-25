@@ -3,8 +3,8 @@ _FILE_INC_ EQU 1
 
 //var handle = 0
 //var fsize = 0
-.data?
-    buffStr db 1024 dup (0)
+//.data?
+//    buffStr db 1024 dup (0)
 
 class FileSystem{
     constructor(){
@@ -37,10 +37,12 @@ class FileSystem{
         return this.bufforInt
     }
     readString(ssize){
-        malloc(ssize)
-        ReadFile(this.handle, qword ptr buffStr, ssize, 0, 0)
-        printf('READSTR %s', qword ptr buffStr)
-        //return this.buffor
+        inc ssize
+        this.bufforStr = malloc(ssize)
+        //dec ssize
+        ReadFile(this.handle, this.bufforStr, ssize, 0, 0)
+        printf('READSTR %s', this.bufforStr)
+        return this.bufforStr
     }
     close(){
         CloseHandle(this.handle)

@@ -52,6 +52,7 @@ var triangles = 0
 var vertInTrianglesTri = 3
 var vertInTrianglesDuo = 2
 var numsInVert = 3
+var numsInCoord = 2
 var bytes = 8
 
 var vertsBuff = NULL
@@ -85,7 +86,7 @@ function SystemInit(){
     //vertsSizeBuff = fs.readInt()
     vertsBuff = fs.read(vertsSizeBuff)
 
-    cordsSizeBuff = triangles * vertInTrianglesTri * numsInVert * bytes
+    cordsSizeBuff = triangles * vertInTrianglesTri * numsInCoord * bytes
     //printf('cordsSizeBuff %i',cordsSizeBuff)
 
     //cordsSizeBuff = fs.readInt()
@@ -93,8 +94,9 @@ function SystemInit(){
 
     textureLengthName = fs.readInt()
     printf('textureLengt %i ', textureLengthName)
-    //fs.readString(12)
-    //textureID = loadTexture(&textureName)
+    textureName = fs.readString(textureLengthName)
+    printf('textureName %s ', textureName)
+    textureID = loadTexture(textureName)
 
     meshes[0].createGeometry(triangles,vertsBuff,coordsBuff)
 
@@ -105,7 +107,7 @@ function SystemInit(){
 
 
 
-    textureID = loadTexture(&texName)
+    //textureID = loadTexture(&texName)
 
     
     
