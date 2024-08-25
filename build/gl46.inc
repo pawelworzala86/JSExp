@@ -1380,6 +1380,38 @@ GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW = 33517
 
 .code
 InitGL proc
+invoke wglGetProcAddress, "glActiveTexture"
+mov [glActiveTexture],rax
+invoke wglGetProcAddress, "glAttachShader"
+mov [glAttachShader],rax
+invoke wglGetProcAddress, "glCompileShader"
+mov [glCompileShader],rax
+invoke wglGetProcAddress, "glCreateProgram"
+mov [glCreateProgram],rax
+invoke wglGetProcAddress, "glCreateShader"
+mov [glCreateShader],rax
+invoke wglGetProcAddress, "glDeleteShader"
+mov [glDeleteShader],rax
+invoke wglGetProcAddress, "glDetachShader"
+mov [glDetachShader],rax
+invoke wglGetProcAddress, "glEnableVertexAttribArray"
+mov [glEnableVertexAttribArray],rax
+invoke wglGetProcAddress, "glGetUniformLocation"
+mov [glGetUniformLocation],rax
+invoke wglGetProcAddress, "glLinkProgram"
+mov [glLinkProgram],rax
+invoke wglGetProcAddress, "glShaderSource"
+mov [glShaderSource],rax
+invoke wglGetProcAddress, "glUseProgram"
+mov [glUseProgram],rax
+invoke wglGetProcAddress, "glUniform1i"
+mov [glUniform1i],rax
+invoke wglGetProcAddress, "glVertexAttribPointer"
+mov [glVertexAttribPointer],rax
+invoke wglGetProcAddress, "glBindVertexArray"
+mov [glBindVertexArray],rax
+invoke wglGetProcAddress, "glUniformMatrix4dv"
+mov [glUniformMatrix4dv],rax
 
 
 ret

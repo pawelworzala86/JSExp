@@ -127,6 +127,8 @@ async function loadModel(path, modelName, destiny, nsize=undefined){
         addF64A([...mesh.coord])
         //addI64([BigInt(mesh.geometry.indices.length*8)])
         //addF64A([...mesh.geometry.indices].map(BigInt))
+        addI64([BigInt('texture.jpg'.length)])
+        addString('texture.jpg')
 
     }
 
