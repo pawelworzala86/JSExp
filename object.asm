@@ -26,16 +26,26 @@
     ret
     objPrint endp
 
+    objPrint2 proc obj:ptr qword
+        mov rax, 11
+        mov qword ptr obj+0, rax
+        invoke printf, "%i", qword ptr obj+0
+    ret
+    objPrint2 endp
+
 entry_point proc
 
-    invoke printf, "%i", valA 
+    ;invoke printf, "%i", valA 
 
-    ;mov rax, 11
-    ;mov objAA.propA, rax
-    lea rax, objAA
-    rcall objPrint, rax
+    ;lea rax, objAA
+    ;rcall objPrint, rax
 
-    invoke printf, "%i", objAA.propA
+lea rax, valA
+    rcall objPrint2, rax
+
+    invoke printf, "%i", qword ptr [valA]
+
+    ;invoke printf, "%i", objAA.propA
 
     invoke printf, "OK"
 
