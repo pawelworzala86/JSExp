@@ -67,6 +67,8 @@ var parseSource = (source)=>{
 
     r(/(.*) = Math\.(.*)\((.*)\)/gm,'Macro_Math_$2 $3, $1')
 
+    r(/self\.([a-zA-Z0-9]+)\[/gm,'self.$1\\\\[')
+
 
 
 /*

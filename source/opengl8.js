@@ -26,7 +26,7 @@ var emptyMatrix = Array(16)
 
 
 var textureID = 0
-var texName = 'texture.jpg'
+//var texName = 'texture.jpg'
 
 
 var defaultShader = 0

@@ -30,7 +30,7 @@ class OBJTest{
         //innOBJ_constructor\\\\ this.objA[1]
     }
     print(){
-        this.objA[0].print(2)
+        this.objA[0].print()
         printf("%i", this.varA)
     }
 }
