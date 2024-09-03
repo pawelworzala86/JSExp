@@ -14,11 +14,28 @@
         valA dq  12
         valB dq 12
 
+        objAA label OBJA
+
 ; ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 .code
+
+    objPrint proc obj: OBJA
+        mov rax, 11
+        mov obj.propA, rax
+        invoke printf, "%i", obj.propA
+    ret
+    objPrint endp
+
 entry_point proc
 
     invoke printf, "%i", valA 
+
+    ;mov rax, 11
+    ;mov objAA.propA, rax
+    lea rax, objAA
+    rcall objPrint, rax
+
+    invoke printf, "%i", objAA.propA
 
     invoke printf, "OK"
 
